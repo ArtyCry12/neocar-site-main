@@ -1,0 +1,34 @@
+import React from "react";
+import { AnimatedMarqueeHero } from "@/components/ui/hero-3";
+
+/**
+ * МАССИВ ЛОКАЛЬНЫХ ИЗОБРАЖЕНИЙ
+ * Убедитесь, что файлы с этими названиями лежат в папке public вашего проекта
+ */
+const NEOCAR_IMAGES = [
+  "/hero-section-design-photoelement-for-application-1.jpg",
+  "/hero-section-design-photoelement-for-application-2.jpg",
+  "/hero-section-design-photoelement-for-application-3.jpg",
+  "/hero-section-design-photoelement-for-application-4.jpg",
+  "/hero-section-design-photoelement-for-application-5.jpg",
+];
+
+const HeroFilling = () => {
+  return (
+    <AnimatedMarqueeHero
+      tagline="Более 500 довольных клиентов в Молдове"
+      title={
+        <>
+          Складская техника №1
+          <br />
+          в Молдове
+        </>
+      }
+      description="Продажа, аренда и полное обслуживание погрузчиков и спецтехники в Кишинёве. Техника из Японии и Европы — с гарантией и сервисом под ключ."
+      ctaText="Получить консультацию"
+      images={NEOCAR_IMAGES}
+    />
+  );
+};
+
+export default HeroFilling;

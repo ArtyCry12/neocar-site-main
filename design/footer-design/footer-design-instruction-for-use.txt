@@ -1,0 +1,20 @@
+# Footer · Инструкция по использованию
+
+## Что собираем
+Футер сайта NEOCAR. Премиальный градиент, glass‑карточки, логотип слева,
+контакты/услуги/легал — справа. Реализация — `web/components/layout/Footer.tsx`.
+
+## Ассеты этой папки → web/public
+- `company-logo.PNG` → `web/public/media/neocar-logo.png` (один файл на весь сайт).
+
+## Тексты
+- Источник: `design/prompts/text-content-and-text-structure-of-the-website.txt`, блок «Footer».
+- Назначение в коде: `web/messages/{ru,ro,en}.ts` → блок `Footer`
+  (`tagline`, `contacts`, `services`, `legal`, `privacy`, `terms`, `cookies`,
+  `brandSubtitle`, `navServices`, `navCatalog`, `navContact`,
+  `mailPrivacy`, `mailTerms`, `mailCookies`, `rights`).
+
+## Поведение
+- Контакты берутся из блока `Contact` (один источник истины).
+- Юридические ссылки → `/(legal)/privacy`, `/(legal)/terms`, `/(legal)/cookies` (страницы создаём в этапе H — никаких `mailto:` заглушек).
+- Логотип — `next/image`, размер 40×40.

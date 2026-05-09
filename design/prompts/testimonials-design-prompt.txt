@@ -1,0 +1,31 @@
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
+function Component() {
+  return (
+    <div className="flex items-center rounded-full border border-border bg-background p-1.5 shadow-sm">
+      <div className="flex -space-x-2">
+        <Avatar className="h-6 w-6 ring-2 ring-background">
+          <AvatarImage src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=64&h=64&auto=format&fit=crop" alt="Client 1" />
+          <AvatarFallback>UN</AvatarFallback>
+        </Avatar>
+        <Avatar className="h-6 w-6 ring-2 ring-background">
+          <AvatarImage src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=64&h=64&auto=format&fit=crop" alt="Client 2" />
+          <AvatarFallback>IS</AvatarFallback>
+        </Avatar>
+        <Avatar className="h-6 w-6 ring-2 ring-background">
+          <AvatarImage src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=64&h=64&auto=format&fit=crop" alt="Client 3" />
+          <AvatarFallback>AC</AvatarFallback>
+        </Avatar>
+        <Avatar className="h-6 w-6 ring-2 ring-background">
+          <AvatarImage src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=64&h=64&auto=format&fit=crop" alt="Client 4" />
+          <AvatarFallback>MS</AvatarFallback>
+        </Avatar>
+      </div>
+      <p className="px-3 text-[11px] leading-none text-muted-foreground">
+        Aprobat de peste <strong className="font-bold text-foreground tracking-tight">500+ șoferi</strong> din Moldova.
+      </p>
+    </div>
+  );
+}
+
+export { Component };

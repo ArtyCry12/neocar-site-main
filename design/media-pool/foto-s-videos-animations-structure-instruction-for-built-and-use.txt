@@ -1,0 +1,21 @@
+# Media Pool · Инструкция по использованию
+
+## Что в папке
+Фото/видео для слайдера, фоновых вставок и потенциальных модальных превью.
+
+## Маппинг → web/public
+- `background-photo-1.jpg.jpg` → `web/public/media/slider/slide-1.jpg`
+- `background-photo-2.jpg.jpg` → `web/public/media/slider/slide-2.jpg`
+- `background-photo-3.jpg.jpg` → `web/public/media/slider/slide-3.jpg`
+- `neocar-background-video-delivery.mp4.mp4`  → `web/public/media/video/delivery.mp4`
+- `neocar-background-video-inspection.mp4.mp4`→ `web/public/media/video/inspection.mp4`
+
+## Обработка перед коммитом
+- Видео сжать до < 4 MB каждое:
+  `ffmpeg -i in.mp4 -c:v libx264 -crf 28 -preset slow -movflags +faststart -an -vf "scale=-2:720" out.mp4`
+- Фото — оставить исходные, оптимизация через `next/image`.
+
+## Где используется в коде
+- Слайдер: `web/components/sections/ImageAutoSliderSection.tsx`.
+- Маркиза hero (раздельно): `web/components/sections/HeroPhotoMarqueeSection.tsx` (берёт изображения из `web/public/media/hero/`).
+- В будущем — карточки услуг и галерея.

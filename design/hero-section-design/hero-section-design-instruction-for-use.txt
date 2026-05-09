@@ -1,0 +1,31 @@
+# Hero Section · Инструкция по использованию
+
+## Что собираем
+Главный экран сайта NEOCAR. 3D‑модель погрузчика — основной объект. Вокруг
+вращаются «спутники»: фото из этой папки и иконки услуг. Прокрутка управляет
+сценой (4 стадии). Реализация — `web/components/hero/*` и `web/content/stages.ts`.
+
+## Ассеты этой папки → web/public
+- `hero-section-design-photoelement-for-application1.jpg` → `web/public/media/hero/marquee-1.jpg`
+- `hero-section-design-photoelement-for-application2.jpg` → `web/public/media/hero/marquee-2.jpg`
+- `hero-section-design-photoelement-for-application3.jpg` → `web/public/media/hero/marquee-3.jpg`
+- `hero-section-design-photoelement-for-application4.jpg` → `web/public/media/hero/marquee-4.jpg`
+- `hero-section-design-photoelement-for-application5.jpg` → `web/public/media/hero/marquee-5.jpg`
+- `company-logo.PNG` → `web/public/media/neocar-logo.png` (используется в `SiteHeader` и `Footer`)
+
+## Тексты
+- Источник: `design/prompts/text-content-and-text-structure-of-the-website.txt` и `hero-text-filling.txt` (этой папки).
+- Назначение в коде: `web/messages/{ru,ro,en}.ts` → блоки `Hero`, `Marquee`, `SocialProof`, `Announcement`.
+
+## Связь с компонентами
+- `web/components/hero/HomeHero.tsx`         — точка входа
+- `web/components/hero/HeroSection.tsx`      — sticky‑секция, scrollProgress
+- `web/components/hero/HeroCanvas.tsx`       — Three.js canvas + GLB
+- `web/components/hero/HeroOrbitItems.tsx`   — орбитальные фото/иконки
+- `web/components/hero/HeroStageCopy.tsx`    — тексты по стадиям
+- `web/components/hero/SocialProof.tsx`      — социальное доказательство
+
+## Поведение
+- Hero pinned на 4× viewport, 4 стадии (intro → catalog → service → contact CTA).
+- Движение модели и спутников — `useScroll` + `useTransform` (+ опционально GSAP ScrollTrigger на десктопе). При `prefers-reduced-motion` — статичная сцена.
+- Производительность: dynamic import без SSR, Suspense skeleton, dpr ≤ 1.8.
