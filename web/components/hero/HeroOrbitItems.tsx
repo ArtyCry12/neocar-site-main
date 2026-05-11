@@ -13,7 +13,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import useMeasure from "react-use-measure";
 
 import { heroStages } from "@/content/stages";
@@ -36,16 +36,21 @@ export default function HeroOrbitItems({
 }) {
   const reduceMotion = useReducedMotion();
   const tOrbit = useTranslations("HeroOrbit");
-  const [ringAngle, setRingAngle] = useState(0);
+  const ringRef = useRef<HTMLDivElement>(null);
   const [ref, bounds] = useMeasure();
 
   useEffect(() => {
     if (reduceMotion) return;
     let raf = 0;
+    let angle = 0;
     let last = performance.now();
     const tick = (now: number) => {
-      setRingAngle((a) => a + (now - last) * 0.00004);
+      angle += (now - last) * 0.00004;
       last = now;
+      const el = ringRef.current;
+      if (el) {
+        el.style.transform = `translate(-50%, -50%) rotate(${angle}rad)`;
+      }
       raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
@@ -66,10 +71,9 @@ export default function HeroOrbitItems({
       aria-hidden
     >
       <div
-        className="absolute left-1/2 top-[45%] -translate-x-1/2 -translate-y-1/2"
-        style={{
-          transform: `translate(-50%, -50%) rotate(${reduceMotion ? 0 : ringAngle}rad)`,
-        }}
+        ref={ringRef}
+        className="absolute left-1/2 top-[45%]"
+        style={{ transform: "translate(-50%, -50%)" }}
       >
         {items.map((item, idx) => {
           const angle = item.angleStart;

@@ -105,7 +105,7 @@ type Props = {
 
 export default function HeroCanvas({ active }: Props) {
   const [can3D, setCan3D] = useState(false);
-  const [isDesktop, setIsDesktop] = useState(true);
+  const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 1024px)");

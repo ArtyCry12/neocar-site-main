@@ -7,5 +7,13 @@ export function canRender3D(): boolean {
   if (mem !== undefined && mem < 4) {
     return false;
   }
+  try {
+    const testCanvas = document.createElement("canvas");
+    const gl =
+      testCanvas.getContext("webgl2") ?? testCanvas.getContext("webgl");
+    if (!gl) return false;
+  } catch {
+    return false;
+  }
   return true;
 }

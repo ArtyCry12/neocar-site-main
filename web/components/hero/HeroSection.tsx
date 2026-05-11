@@ -15,7 +15,7 @@ const HeroCanvas = dynamic(() => import("./HeroCanvas"), {
 });
 
 const STAGE_COUNT = 4;
-const CAROUSEL_MS = 6000;
+const CAROUSEL_MS = 3000;
 
 export default function HeroSection({
   copy,
@@ -55,19 +55,23 @@ export default function HeroSection({
       data-testid="home-hero"
       className="relative isolate min-h-[100svh] scroll-mt-20 overflow-hidden bg-gradient-to-br from-[#FEC04D]/15 via-[#1A1A1A] to-[#0a0a0a]"
     >
-      <div className="pointer-events-none absolute left-1/2 top-4 z-20 -translate-x-1/2 md:top-6">
-        <Image
-          src="/media/neocar-logo-hero.png"
-          alt="NEOCAR"
-          width={240}
-          height={240}
-          priority
-          sizes="(max-width: 1023px) 160px, 240px"
-          className="h-40 w-40 object-contain md:h-60 md:w-60"
-        />
+      <div className="pointer-events-none absolute inset-x-0 top-5 z-20 flex justify-center md:top-7">
+        <div className="flex items-center gap-2.5 rounded-2xl border border-white/10 bg-black/40 px-4 py-2 backdrop-blur-md">
+          <Image
+            src="/media/neocar-logo-hero.png"
+            alt="NEOCAR"
+            width={32}
+            height={32}
+            priority
+            className="h-8 w-8 object-contain"
+          />
+          <span className="font-sans text-base font-bold tracking-tight text-white">
+            NEOCAR
+          </span>
+        </div>
       </div>
 
-      <div className="relative flex min-h-[100svh] flex-col lg:flex-row lg:pt-8">
+      <div className="relative flex min-h-[100svh] flex-col pt-16 lg:flex-row lg:pt-20">
         <div className="relative flex min-h-[45svh] flex-1 flex-col lg:min-h-[100svh] lg:flex-[1.15]">
           <HeroCanvas active={active} />
           <HeroOrbitItems stageIdx={effectiveStage} />

@@ -15,6 +15,24 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
+        source: "/models/:file*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      {
+        source: "/media/:file*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=86400, stale-while-revalidate=604800",
+          },
+        ],
+      },
+      {
         source: "/:path*",
         headers: [
           { key: "X-DNS-Prefetch-Control", value: "on" },

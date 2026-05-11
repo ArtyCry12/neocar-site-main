@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useTranslations } from "next-intl";
 
 import SocialProof from "@/components/hero/SocialProof";
@@ -30,40 +30,31 @@ export default function HeroStageCopy({ stageIdx }: { stageIdx: number }) {
         <span className="mb-4 inline-flex rounded-full border border-accent-burnt/30 bg-black/35 px-4 py-1 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-accent-amber/90 backdrop-blur-sm">
           {tHero("badge")}
         </span>
-        <div className="relative min-h-[10rem] lg:min-h-[12rem]" aria-live="polite">
-          <motion.h1
-            key={stageKey}
-            initial={{ opacity: 0, y: reduceMotion ? 0 : 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              duration: reduceMotion ? 0 : 0.45,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-            className="text-balance bg-gradient-to-r from-[#FEC04D] to-[#E29303] bg-clip-text text-2xl font-semibold tracking-tight text-transparent md:text-3xl lg:text-5xl"
-          >
-            {title}
-          </motion.h1>
-          <ul className="mt-5 max-w-xl space-y-2 text-left text-sm text-white/80 md:text-base">
-            {bullets.map((line, lineIdx) => (
-              <motion.li
-                key={`${stageKey}-${lineIdx}`}
-                initial={{
-                  opacity: 0,
-                  clipPath: reduceMotion ? "none" : "inset(0 100% 0 0)",
-                }}
-                animate={{
-                  opacity: 1,
-                  clipPath: reduceMotion ? "none" : "inset(0 0% 0 0)",
-                }}
-                transition={{
-                  duration: reduceMotion ? 0 : 0.35,
-                  delay: reduceMotion ? 0 : lineIdx * 0.05,
-                }}
-              >
-                {line}
-              </motion.li>
-            ))}
-          </ul>
+        <div aria-live="polite" className="relative">
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={stageKey}
+              initial={{ opacity: 0, y: reduceMotion ? 0 : 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: reduceMotion ? 0 : -6 }}
+              transition={{
+                duration: reduceMotion ? 0 : 0.28,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+            >
+              <h1 className="text-balance bg-gradient-to-r from-[#FEC04D] via-[#FDAD1C] to-[#E29303] bg-clip-text text-2xl font-bold tracking-tight text-transparent md:text-3xl lg:text-5xl">
+                {title}
+              </h1>
+              <ul className="mt-4 space-y-2 text-sm text-white/75 md:text-base">
+                {bullets.map((line, i) => (
+                  <li key={i} className="flex items-start gap-2.5">
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent-amber" />
+                    <span>{line}</span>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          </AnimatePresence>
         </div>
         <div className="mt-4 flex w-full max-w-md items-center gap-2">
           {Array.from({ length: STAGE_COUNT }).map((_, i) => (

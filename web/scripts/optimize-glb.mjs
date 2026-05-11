@@ -31,7 +31,7 @@ const result = spawnSync(
     "--texture-compress",
     "webp",
     "--texture-size",
-    "1024",
+    "512",
   ],
   { stdio: "inherit", shell: true, cwd: root },
 );
