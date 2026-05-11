@@ -29,3 +29,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 *.log
+
+# Large raw 3D sources (use optimize:glb to produce forklift.opt.glb)
+web/public/models/forklift-source.glb

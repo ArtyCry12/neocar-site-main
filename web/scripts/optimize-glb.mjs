@@ -7,7 +7,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.join(__dirname, "..");
 const modelsDir = path.join(root, "public", "models");
 
-const candidates = ["forklift.full.glb", "forklift.glb"]
+const candidates = ["forklift-source.glb", "forklift.full.glb", "forklift.glb"]
   .map((name) => path.join(modelsDir, name))
   .filter((p) => existsSync(p));
 
