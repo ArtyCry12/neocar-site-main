@@ -28,31 +28,33 @@ type IconOrbitItem = {
   size: number;
 };
 
+export type OrbitItem = ImageOrbitItem | IconOrbitItem;
+
 export type Stage = {
   id: HeroStageId;
   copyKey: keyof Messages["HeroStages"];
-  model: {
-    position: [number, number, number];
-    rotation: [number, number, number];
-    scale: number;
-    lookAt: [number, number, number];
-  };
   orbit: {
-    items: Array<ImageOrbitItem | IconOrbitItem>;
+    items: OrbitItem[];
   };
   background: string;
 };
 
-export const heroStages = [
+function doubleOrbitItems(items: readonly OrbitItem[]): OrbitItem[] {
+  const next: OrbitItem[] = [...items];
+  for (const it of items) {
+    next.push({
+      ...it,
+      angleStart: it.angleStart + Math.PI,
+      radius: it.radius * 1.05,
+    });
+  }
+  return next;
+}
+
+const stageBases = [
   {
     id: "intro",
     copyKey: "intro",
-    model: {
-      position: [0, -0.35, 0],
-      rotation: [0.08, 0.65, 0],
-      scale: 1,
-      lookAt: [0, 0.35, 0],
-    },
     orbit: {
       items: [
         {
@@ -88,17 +90,11 @@ export const heroStages = [
       ],
     },
     background:
-      "linear-gradient(135deg, rgb(9 9 11 / 0.92), rgb(24 24 27 / 0.55), rgb(127 29 29 / 0.35))",
+      "linear-gradient(135deg, rgb(10 10 12 / 0.92), rgb(26 26 26 / 0.75), rgb(226 147 3 / 0.18))",
   },
   {
     id: "catalog",
     copyKey: "catalog",
-    model: {
-      position: [0.15, -0.42, 0.12],
-      rotation: [0.12, -0.55, 0.02],
-      scale: 1.06,
-      lookAt: [0, 0.25, 0],
-    },
     orbit: {
       items: [
         {
@@ -134,17 +130,11 @@ export const heroStages = [
       ],
     },
     background:
-      "linear-gradient(145deg, rgb(9 9 11 / 0.94), rgb(39 39 42 / 0.45), rgb(185 28 28 / 0.28))",
+      "linear-gradient(145deg, rgb(10 10 12 / 0.94), rgb(32 32 34 / 0.8), rgb(253 173 28 / 0.16))",
   },
   {
     id: "service",
     copyKey: "service",
-    model: {
-      position: [-0.12, -0.38, -0.08],
-      rotation: [0.05, 1.15, -0.03],
-      scale: 1.03,
-      lookAt: [0, 0.32, 0],
-    },
     orbit: {
       items: [
         {
@@ -180,17 +170,11 @@ export const heroStages = [
       ],
     },
     background:
-      "linear-gradient(155deg, rgb(9 9 11 / 0.93), rgb(24 24 27 / 0.6), rgb(234 88 12 / 0.22))",
+      "linear-gradient(155deg, rgb(10 10 12 / 0.93), rgb(26 26 26 / 0.78), rgb(254 192 77 / 0.14))",
   },
   {
     id: "cta",
     copyKey: "cta",
-    model: {
-      position: [0, -0.4, 0],
-      rotation: [0.06, 2.35, 0],
-      scale: 1.08,
-      lookAt: [0, 0.38, 0],
-    },
     orbit: {
       items: [
         {
@@ -216,9 +200,23 @@ export const heroStages = [
           radius: 3.22,
           size: 46,
         },
+        {
+          kind: "icon",
+          icon: "Forklift",
+          angleStart: 5.55,
+          radius: 3.3,
+          size: 44,
+        },
       ],
     },
     background:
-      "linear-gradient(160deg, rgb(9 9 11 / 0.95), rgb(59 7 100 / 0.38), rgb(220 38 38 / 0.25))",
+      "linear-gradient(160deg, rgb(10 10 12 / 0.95), rgb(64 64 64 / 0.35), rgb(226 147 3 / 0.2))",
   },
-] as const satisfies readonly Stage[];
+] as const;
+
+export const heroStages: Stage[] = stageBases.map((s) => ({
+  id: s.id,
+  copyKey: s.copyKey,
+  background: s.background,
+  orbit: { items: doubleOrbitItems(s.orbit.items) },
+}));

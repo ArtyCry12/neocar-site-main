@@ -12,13 +12,12 @@ import SiteHeader from "@/components/layout/SiteHeader";
 import HomeHero from "@/components/hero/HomeHero";
 import AboutSection from "@/components/sections/AboutSection";
 import CatalogSection from "@/components/sections/CatalogSection";
-import ComparisonSection from "@/components/sections/ComparisonSection";
+import ValueSection from "@/components/sections/ValueSection";
 import ContactSection from "@/components/sections/ContactSection";
 import HeroPhotoMarqueeSection from "@/components/sections/HeroPhotoMarqueeSection";
 import ImageAutoSliderSection from "@/components/sections/ImageAutoSliderSection";
 import ServicesSection from "@/components/sections/ServicesSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
-import WhySection from "@/components/sections/WhySection";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -167,8 +166,7 @@ export default async function Home({ params }: Props) {
         <CatalogSection />
         <ServicesSection />
         <ImageAutoSliderSection />
-        <WhySection />
-        <ComparisonSection />
+        <ValueSection />
         <TestimonialsSection />
         <ContactSection />
         <Footer />

@@ -13,40 +13,36 @@ const ro = {
       "Vânzare, închiriere și service complet pentru stivuitoare și tehnică specială în Chișinău. Tehnică din Japonia și Europa — cu garanție și service la cheie.",
     ctaPrimary: "Solicitați consultanță",
     ctaSecondary: "Vezi catalogul",
-    hint: "Derularea lină controlează scena 3D — modelul și interfața se sincronizează cu scroll-ul.",
+    hint: "Conținutul se schimbă automat: un rezumat al serviciilor NEOCAR.",
     badge: "NEOCAR · din 2004",
   },
   HeroStages: {
     intro: {
-      title: "Tehnică de depozit, cap-coadă",
+      title: "Aprovizionare și închirieri",
       bullets: [
-        "Potrivim utilajul la fluxuri și buget — fără surplus",
-        "Import din Japonia și Europa, istoric transparent",
-        "Service local, stoc piese și răspuns rapid",
+        "Vânzare tehnică din Japonia și Europa.",
+        "Închiriere cu termeni flexibili.",
       ],
     },
     catalog: {
-      title: "Catalog și închirieri",
+      title: "Service și piese din stoc",
       bullets: [
-        "Stivuitoare, electrice, telehandlers și atașamente",
-        "Inspecție înainte de livrare și închirieri flexibile",
-        "Portofoliu cu branduri industriale consacrate",
+        "Reparații și mentenanță în service propriu.",
+        "Piese și componente din stoc.",
       ],
     },
     service: {
-      title: "Service, piese și HID",
+      title: "HID, hidraulică și anvelope",
       bullets: [
-        "Atelier propriu pentru mentenanță și reparații",
-        "Expediere rapidă din depozitul din Chișinău",
-        "Fabricare și refacere furtunuri HID",
+        "Furtunuri HID și cilindri — producție și reparație.",
+        "Anvelope pentru tehnică specială cu montaj la fața locului.",
       ],
     },
     cta: {
-      title: "Pregătit să îți întărești parcul?",
+      title: "Atașamente și următorii pași",
       bullets: [
-        "Lasă o solicitare — revenim cu pașii următori",
-        "Consultanță tehnică fără obligații",
-        "Acoperim Moldova din Chișinău",
+        "Cupe și echipamente atașabile.",
+        "Trimiteți o solicitare — vă propunem soluția potrivită parcului.",
       ],
     },
   },
@@ -73,14 +69,11 @@ const ro = {
   },
   About: {
     title: "Cine suntem",
-    p1:
-      "NEOCAR SRL este o companie moldovenească cu experiență îndelungată în tehnică de depozit și specială.",
-    p2:
-      "Lucrăm din 2004 și am devenit partener principal pentru zeci de întreprinderi în Moldova.",
-    p3:
-      "Specializarea noastră — vânzare, închiriere, mentenanță și reparații pentru stivuitoare și tehnică specială.",
-    p4:
-      "Nu vindem doar utilaje — susținem întregul ciclu de viață: selecție, cumpărare, mentenanță și urgențe.",
+    kicker: "NEOCAR · din 2004",
+    p_lead:
+      "NEOCAR SRL este o companie moldovenească cu experiență îndelungată în tehnică de depozit și specială. Lucrăm din 2004 și am devenit partener principal pentru zeci de întreprinderi în Moldova.",
+    p_support:
+      "Specializarea noastră — vânzare, închiriere, mentenanță și reparații pentru stivuitoare și tehnică specială. Nu vindem doar utilaje — susținem întregul ciclu de viață: selecție, cumpărare, mentenanță și urgențe.",
   },
   Stats: {
     foundedLabel: "An înființării",
@@ -104,20 +97,21 @@ const ro = {
       "Toyota Industrial Equipment, Mitsubishi, Komatsu, Caterpillar, Nissan, TCM, Linde, Bobcat, Fiat-Hitachi, Manitou, Balkancar.",
   },
   Services: {
-    title: "Tot ce ai nevoie — într-un singur loc",
+    titlePart1: "Tot ce îți trebuie pentru utilajele tale —",
+    titlePart2: "într-un singur loc",
   },
   Why: {
-    title: "Alții vând. Noi rezolvăm integral.",
+    title: "De ce ne aleg pe noi",
     subtitle:
-      "NEOCAR — ciclu complet pentru tehnică de depozit sub același acoperiș.",
-    quote:
-      "«Concurenții îți dau un stivuitor. Noi îți dăm un proces care merge.»",
-  },
-  Comparison: {
-    title: "NEOCAR vs concurent tipic",
-    colFeature: "Capabilitate",
-    colOther: "Concurent",
-    colUs: "NEOCAR",
+      "NEOCAR — ciclu complet de întreținere sub același acoperiș.",
+    typicalLabel: "De obicei",
+    usLabel: "La noi",
+    v1Typical: "Tranzacție unică, fără suport continuu",
+    v1Us: "Ciclu de viață complet — de la selecție la reparații",
+    v2Typical: "Stoc limitat pe rafturi",
+    v2Us: "Aprovizionări din Japonia și Europa cu istoric clar",
+    v3Typical: "Așteptări lungi pentru piese",
+    v3Us: "Stoc propriu: expediere în aceeași zi",
   },
   Testimonials: {
     title: "Feedback clienți",

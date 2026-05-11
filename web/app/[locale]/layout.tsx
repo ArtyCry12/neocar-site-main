@@ -5,6 +5,7 @@ import { routing } from "@/i18n/routing";
 import { LenisRoot } from "@/components/providers/LenisRoot";
 import { LangUpdater } from "@/components/providers/LangUpdater";
 import CookieConsent from "@/components/layout/CookieConsent";
+import { HeroMiniCanvasRoot } from "@/components/hero/HeroMiniCanvasRoot";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -31,6 +32,7 @@ export default async function LocaleLayout({
       <LangUpdater />
       <LenisRoot>
         {children}
+        <HeroMiniCanvasRoot />
         <CookieConsent />
       </LenisRoot>
     </NextIntlClientProvider>

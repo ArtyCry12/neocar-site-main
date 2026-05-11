@@ -13,40 +13,36 @@ const en = {
       "Sales, rental and full service for forklifts and special equipment in Chișinău. Machinery from Japan and Europe — with warranty and turnkey service.",
     ctaPrimary: "Get a consultation",
     ctaSecondary: "View catalog",
-    hint: "Smooth scrolling drives the 3D scene — the model and UI stay in sync.",
+    hint: "The hero rotates every few seconds — a quick tour of how NEOCAR supports your fleet.",
     badge: "NEOCAR · since 2004",
   },
   HeroStages: {
     intro: {
-      title: "Warehouse equipment, end-to-end",
+      title: "Supply & rental",
       bullets: [
-        "Sizing fleets to your workflows and budget — no overselling",
-        "Imports from Japan and Europe with transparent machine history",
-        "Local service desk, spare parts stock and rapid support",
+        "Equipment sales from Japan and Europe.",
+        "Flexible forklift rental.",
       ],
     },
     catalog: {
-      title: "Fleet catalog & rental desk",
+      title: "Workshop & parts stock",
       bullets: [
-        "Forklifts, electrics, telehandlers and attachments",
-        "Pre‑delivery inspections plus seasonal or long‑term rental",
-        "Portfolio spanning leading industrial OEM brands",
+        "Repair and planned maintenance in-house.",
+        "Parts and components from stock.",
       ],
     },
     service: {
-      title: "Workshop, parts & hydraulics",
+      title: "Hoses, hydraulics & tires",
       bullets: [
-        "In‑house PM and repair capacity that protects uptime",
-        "Same‑day pickup options from our Chișinău warehouse",
-        "Hydraulic hose fabrication and cylinder overhaul",
+        "Hydraulic hoses and cylinders — build & repair.",
+        "Industrial tires with on-site mounting.",
       ],
     },
     cta: {
-      title: "Ready to strengthen your fleet?",
+      title: "Attachments & next steps",
       bullets: [
-        "Send a request — we reply by phone and email with next steps",
-        "Engineering consultation without obligation",
-        "Serving Moldova from our Chișinău headquarters",
+        "Buckets and attachments.",
+        "Send a request — we will size the right setup for your fleet.",
       ],
     },
   },
@@ -73,14 +69,11 @@ const en = {
   },
   About: {
     title: "Who we are",
-    p1:
-      "NEOCAR SRL is a Moldovan company with deep experience in warehouse and special equipment.",
-    p2:
-      "Since 2004 we have become a key partner for dozens of enterprises across Moldova.",
-    p3:
-      "We focus on sales, rental, maintenance and repair of forklifts and equipment from leading brands.",
-    p4:
-      "We do not only sell machines — we support the full lifecycle from selection to urgent repairs.",
+    kicker: "NEOCAR · since 2004",
+    p_lead:
+      "NEOCAR SRL is a Moldovan company with deep experience in warehouse and special equipment. Since 2004 we have become a key partner for dozens of enterprises across Moldova.",
+    p_support:
+      "We focus on sales, rental, maintenance and repair of forklifts and equipment from leading brands. We do not only sell machines — we support the full lifecycle from selection to urgent repairs.",
   },
   Stats: {
     foundedLabel: "Founded",
@@ -104,20 +97,21 @@ const en = {
       "Toyota Industrial Equipment, Mitsubishi, Komatsu, Caterpillar, Nissan, TCM, Linde, Bobcat, Fiat-Hitachi, Manitou, Balkancar.",
   },
   Services: {
-    title: "Everything your fleet needs — in one place",
+    titlePart1: "Everything your fleet needs —",
+    titlePart2: "in one place",
   },
   Why: {
-    title: "Others sell. We finish the job.",
+    title: "Why choose us",
     subtitle:
-      "NEOCAR covers the entire warehouse equipment lifecycle under one roof.",
-    quote:
-      "«Competitors give you a forklift. We give you a working operation.»",
-  },
-  Comparison: {
-    title: "NEOCAR vs typical competitor",
-    colFeature: "Capability",
-    colOther: "Competitor",
-    colUs: "NEOCAR",
+      "NEOCAR — full-cycle support under one roof.",
+    typicalLabel: "Typically",
+    usLabel: "With us",
+    v1Typical: "One-off deals with no ongoing support",
+    v1Us: "Full lifecycle — from selection through repairs",
+    v2Typical: "Limited choice sitting in a yard",
+    v2Us: "Supply from Japan and Europe with clear machine history",
+    v3Typical: "Long waits for parts",
+    v3Us: "Own warehouse: same-day dispatch",
   },
   Testimonials: {
     title: "Client feedback",

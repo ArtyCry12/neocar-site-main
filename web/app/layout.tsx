@@ -29,6 +29,14 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${spaceGrotesk.variable} ${GeistMono.variable} relative h-full`}
     >
+      <head>
+        <link
+          rel="preload"
+          href="/models/forklift.opt.glb"
+          as="fetch"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body className="min-h-full bg-background font-sans text-foreground antialiased">
         {children}
       </body>

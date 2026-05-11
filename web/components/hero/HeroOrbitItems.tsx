@@ -1,13 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import {
-  useMotionValueEvent,
-  useReducedMotion,
-  useTransform,
-  motion,
-  type MotionValue,
-} from "framer-motion";
+import { useReducedMotion } from "framer-motion";
 import {
   Forklift as ForkliftIcon,
   Package,
@@ -19,7 +13,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import useMeasure from "react-use-measure";
 
 import { heroStages } from "@/content/stages";
@@ -35,51 +29,60 @@ const ICONS: Record<LucideOrbitIcon, LucideIcon> = {
   Phone,
 };
 
-const STAGE_COUNT = 4;
-
 export default function HeroOrbitItems({
-  progress,
+  stageIdx,
 }: {
-  progress: MotionValue<number>;
+  stageIdx: number;
 }) {
   const reduceMotion = useReducedMotion();
   const tOrbit = useTranslations("HeroOrbit");
-  const [stageIdx, setStageIdx] = useState(0);
+  const [ringAngle, setRingAngle] = useState(0);
   const [ref, bounds] = useMeasure();
 
-  useMotionValueEvent(progress, "change", (v) => {
-    setStageIdx(Math.min(STAGE_COUNT - 1, Math.floor(v * STAGE_COUNT)));
-  });
+  useEffect(() => {
+    if (reduceMotion) return;
+    let raf = 0;
+    let last = performance.now();
+    const tick = (now: number) => {
+      setRingAngle((a) => a + (now - last) * 0.00004);
+      last = now;
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [reduceMotion]);
 
-  const ringRotate = useTransform(progress, [0, 1], [0, reduceMotion ? 0 : 360]);
-
-  const stage = heroStages[stageIdx];
-  const radiusPx = Math.min(bounds.width, bounds.height) * 0.22 || 140;
+  const stage = heroStages[Math.min(3, Math.max(0, stageIdx))];
+  const isMobile = bounds.width > 0 && bounds.width < 640;
+  const radiusFactor = isMobile ? 0.18 : 0.22;
+  const radiusPx = Math.min(bounds.width, bounds.height) * radiusFactor || 140;
 
   const items = useMemo(() => stage.orbit.items, [stage]);
 
   return (
     <div
       ref={ref}
-      className="pointer-events-none absolute inset-0 z-[5] hidden overflow-visible md:block"
+      className="pointer-events-none absolute inset-0 z-[5] overflow-visible"
       aria-hidden
     >
-      <motion.div
-        className="absolute left-1/2 top-[42%] -translate-x-1/2 -translate-y-1/2"
-        style={{ rotate: reduceMotion ? 0 : ringRotate }}
+      <div
+        className="absolute left-1/2 top-[45%] -translate-x-1/2 -translate-y-1/2"
+        style={{
+          transform: `translate(-50%, -50%) rotate(${reduceMotion ? 0 : ringAngle}rad)`,
+        }}
       >
         {items.map((item, idx) => {
           const angle = item.angleStart;
           const x = Math.cos(angle) * radiusPx;
           const y = Math.sin(angle) * radiusPx;
-          const size = item.size;
+          const size = Math.round(item.size * (isMobile ? 0.7 : 1));
 
           if (item.kind === "icon") {
             const Icon = ICONS[item.icon];
             return (
               <div
                 key={`${stage.id}-icon-${idx}`}
-                className="absolute flex items-center justify-center rounded-full border border-white/15 bg-black/45 shadow-lg backdrop-blur-md"
+                className="absolute flex items-center justify-center rounded-full border border-accent-burnt/25 bg-black/45 shadow-lg backdrop-blur-md"
                 style={{
                   width: size,
                   height: size,
@@ -88,7 +91,10 @@ export default function HeroOrbitItems({
                   top: 0,
                 }}
               >
-                <Icon className="h-[55%] w-[55%] text-white/85" strokeWidth={1.35} />
+                <Icon
+                  className="h-[55%] w-[55%] text-white/85"
+                  strokeWidth={1.35}
+                />
               </div>
             );
           }
@@ -104,7 +110,7 @@ export default function HeroOrbitItems({
               }}
             >
               <div
-                className="overflow-hidden rounded-full border border-white/15 shadow-xl shadow-black/60"
+                className="overflow-hidden rounded-full border border-accent-burnt/25 shadow-xl shadow-black/60"
                 style={{ position: "relative", width: tile, height: tile }}
               >
                 <Image
@@ -118,7 +124,7 @@ export default function HeroOrbitItems({
             </div>
           );
         })}
-      </motion.div>
+      </div>
     </div>
   );
 }

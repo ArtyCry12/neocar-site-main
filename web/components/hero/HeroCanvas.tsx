@@ -3,63 +3,25 @@
 import Image from "next/image";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { AdaptiveDpr, ContactShadows, useGLTF } from "@react-three/drei";
-import type { MotionValue } from "framer-motion";
 import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import * as THREE from "three";
 
-import { heroStages } from "@/content/stages";
+import { canRender3D } from "@/lib/device";
 
 const MODEL_URL =
   process.env.NEXT_PUBLIC_HERO_GLB_URL ?? "/models/forklift.opt.glb";
 
-function lerp(a: number, b: number, t: number) {
-  return a + (b - a) * t;
-}
-
-function lerpVec(
-  a: [number, number, number],
-  b: [number, number, number],
-  t: number,
-): [number, number, number] {
-  return [lerp(a[0], b[0], t), lerp(a[1], b[1], t), lerp(a[2], b[2], t)];
-}
-
-function stageBlend(progress: number) {
-  const sp = progress * 4;
-  const si = Math.min(3, Math.max(0, Math.floor(sp)));
-  const lt = si < 3 ? sp - si : 0;
-  const cur = heroStages[si];
-  const next = si < 3 ? heroStages[si + 1] : cur;
-  return { cur, next, lt };
-}
-
-function ForkliftPlaceholder({
-  progress,
-  active,
-}: {
-  progress: MotionValue<number>;
-  active: boolean;
-}) {
+function ForkliftPlaceholder({ active }: { active: boolean }) {
   const group = useRef<THREE.Group>(null);
 
-  useFrame(() => {
+  useFrame((_, delta) => {
     if (!active || !group.current) return;
-    const p = progress.get();
-    const { cur, next, lt } = stageBlend(p);
-    const pos = lerpVec(cur.model.position, next.model.position, lt);
-    const rot = lerpVec(cur.model.rotation, next.model.rotation, lt);
-    const scale = lerp(cur.model.scale, next.model.scale, lt);
-    group.current.position.set(...pos);
-    group.current.rotation.set(...rot);
-    group.current.scale.setScalar(scale);
-    group.current.lookAt(
-      new THREE.Vector3(...lerpVec(cur.model.lookAt, next.model.lookAt, lt)),
-    );
+    group.current.rotation.y += delta * 0.2;
   });
 
   return (
-    <group ref={group} position={[0, -0.65, 0]}>
+    <group ref={group} position={[0, -0.65, 0]} rotation={[0, Math.PI, 0]}>
       <mesh>
         <boxGeometry args={[2.35, 1.05, 3.1]} />
         <meshStandardMaterial
@@ -96,13 +58,7 @@ function ForkliftPlaceholder({
   );
 }
 
-function ForkliftGLB({
-  progress,
-  active,
-}: {
-  progress: MotionValue<number>;
-  active: boolean;
-}) {
+function ForkliftGLB({ active }: { active: boolean }) {
   const { scene } = useGLTF(MODEL_URL);
   const group = useRef<THREE.Group>(null);
 
@@ -125,42 +81,44 @@ function ForkliftGLB({
     return root;
   }, [scene]);
 
-  useFrame(() => {
+  useEffect(() => {
+    if (group.current) {
+      group.current.rotation.set(0.08, Math.PI, 0);
+    }
+  }, []);
+
+  useFrame((_, delta) => {
     if (!active || !group.current) return;
-    const p = progress.get();
-    const { cur, next, lt } = stageBlend(p);
-    const pos = lerpVec(cur.model.position, next.model.position, lt);
-    const rot = lerpVec(cur.model.rotation, next.model.rotation, lt);
-    const scale = lerp(cur.model.scale, next.model.scale, lt);
-    group.current.position.set(...pos);
-    group.current.rotation.set(...rot);
-    group.current.scale.setScalar(scale);
-    group.current.lookAt(
-      new THREE.Vector3(...lerpVec(cur.model.lookAt, next.model.lookAt, lt)),
-    );
+    group.current.rotation.y += delta * 0.2;
   });
 
   return (
-    <group ref={group} position={[0, -0.65, 0]}>
+    <group ref={group} position={[0, -0.35, 0]}>
       <primitive object={model} />
     </group>
   );
 }
 
 type Props = {
-  progress: MotionValue<number>;
   active: boolean;
 };
 
-export default function HeroCanvas({ progress, active }: Props) {
-  const [isMobile, setIsMobile] = useState(false);
+export default function HeroCanvas({ active }: Props) {
+  const [can3D, setCan3D] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(true);
 
   useEffect(() => {
-    const mq = window.matchMedia("(max-width: 1023px)");
-    const apply = () => setIsMobile(mq.matches);
-    apply();
+    const mq = window.matchMedia("(min-width: 1024px)");
+    const apply = () => {
+      setCan3D(canRender3D());
+      setIsDesktop(mq.matches);
+    };
+    const id = requestAnimationFrame(apply);
     mq.addEventListener("change", apply);
-    return () => mq.removeEventListener("change", apply);
+    return () => {
+      cancelAnimationFrame(id);
+      mq.removeEventListener("change", apply);
+    };
   }, []);
 
   useEffect(() => {
@@ -170,16 +128,16 @@ export default function HeroCanvas({ progress, active }: Props) {
     if (!section) return;
     const io = new IntersectionObserver(
       ([entry]) => {
-        if (entry.intersectionRatio >= 0.25) {
+        if (entry.intersectionRatio >= 0.15) {
           try {
             useGLTF.preload(MODEL_URL);
           } catch {
-            /* ignore preload failures */
+            /* ignore */
           }
           io.disconnect();
         }
       },
-      { threshold: [0.25] },
+      { threshold: [0.15] },
     );
     io.observe(section);
     return () => io.disconnect();
@@ -187,39 +145,44 @@ export default function HeroCanvas({ progress, active }: Props) {
 
   const useModel = process.env.NEXT_PUBLIC_HERO_USE_GLB !== "false";
 
-  if (isMobile) {
+  if (!can3D) {
     return (
-      <div className="pointer-events-none absolute inset-0 -z-10">
+      <div className="pointer-events-none relative h-full min-h-[50svh] w-full lg:min-h-[100svh]">
         <Image
           src="/media/hero/marquee-1.jpg"
-          alt=""
+          alt="NEOCAR — складская техника, фоновое фото"
           fill
           priority
-          sizes="100vw"
+          sizes="(max-width: 1023px) 100vw, 55vw"
           className="object-cover brightness-[0.38]"
         />
       </div>
     );
   }
 
+  const dprMax = isDesktop ? 1.5 : 1;
+  const showShadowsAndHemi = isDesktop;
+
   return (
-    <div className="pointer-events-none absolute inset-0 -z-10">
+    <div className="pointer-events-none relative h-full min-h-[50svh] w-full lg:min-h-[100svh]">
       <Canvas
-        camera={{ position: [0, 1.1, 6.2], fov: 42 }}
+        camera={{ position: [0, 1.0, 5.5], fov: 44 }}
         gl={{ antialias: true, alpha: true }}
-        className="h-full w-full"
-        dpr={[1, isMobile ? 1.25 : 1.5]}
+        className="h-full w-full min-h-[50svh]"
+        dpr={[1, dprMax]}
       >
-        <color attach="background" args={["#050506"]} />
-        <ambientLight intensity={0.65} />
-        <hemisphereLight
-          color="#fff8f0"
-          groundColor="#1f1e1e"
-          intensity={0.55}
-        />
+        <color attach="background" args={["#0a0a0a"]} />
+        <ambientLight intensity={showShadowsAndHemi ? 0.65 : 0.72} />
+        {showShadowsAndHemi ? (
+          <hemisphereLight
+            color="#fff8f0"
+            groundColor="#1f1e1e"
+            intensity={0.55}
+          />
+        ) : null}
         <directionalLight
           position={[4.5, 8, 3]}
-          intensity={1.25}
+          intensity={showShadowsAndHemi ? 1.25 : 1.05}
           castShadow={false}
         />
         <Suspense
@@ -231,20 +194,20 @@ export default function HeroCanvas({ progress, active }: Props) {
           }
         >
           <AdaptiveDpr />
-          <ContactShadows
-            opacity={0.18}
-            position={[0, -1.05, 0]}
-            scale={14}
-            blur={2.3}
-            frames={1}
-          />
-          <ErrorBoundary
-            fallback={<ForkliftPlaceholder progress={progress} active={active} />}
-          >
+          {showShadowsAndHemi ? (
+            <ContactShadows
+              opacity={0.18}
+              position={[0, -1.05, 0]}
+              scale={14}
+              blur={2.3}
+              frames={1}
+            />
+          ) : null}
+          <ErrorBoundary fallback={<ForkliftPlaceholder active={active} />}>
             {useModel ? (
-              <ForkliftGLB progress={progress} active={active} />
+              <ForkliftGLB active={active} />
             ) : (
-              <ForkliftPlaceholder progress={progress} active={active} />
+              <ForkliftPlaceholder active={active} />
             )}
           </ErrorBoundary>
         </Suspense>
