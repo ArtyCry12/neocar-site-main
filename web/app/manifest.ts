@@ -1,34 +1,23 @@
 import type { MetadataRoute } from "next";
 
-import ru from "@/messages/ru";
-
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "NEOCAR SRL",
+    name: "NEOCAR — Погрузчики в Молдове",
     short_name: "NEOCAR",
-    description: ru.Meta.description,
-    start_url: "/",
+    description:
+      "Продажа, аренда и сервис погрузчиков в Молдове с 2004 года",
+    start_url: "/ru",
     display: "standalone",
-    background_color: "#09090b",
-    theme_color: "#09090b",
+    background_color: "#050506",
+    theme_color: "#E29303",
     icons: [
       {
-        src: "/icon",
-        sizes: "32x32",
-        type: "image/png",
-      },
-      {
-        src: "/apple-icon",
-        sizes: "180x180",
+        src: "/media/neocar-logo.png",
+        sizes: "192x192",
         type: "image/png",
       },
       {
         src: "/media/neocar-logo.png",
-        sizes: "180x180",
-        type: "image/png",
-      },
-      {
-        src: "/media/neocar-logo-512.png",
         sizes: "512x512",
         type: "image/png",
       },

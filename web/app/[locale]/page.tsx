@@ -3,6 +3,7 @@ import Script from "next/script";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { SITE_ORIGIN } from "@/lib/site";
+import { faqPageJsonLd } from "@/lib/faq-jsonld";
 import { localBusinessJsonLd } from "@/lib/seo";
 import AnnouncementBanner from "@/components/layout/AnnouncementBanner";
 import DockNav from "@/components/layout/DockNav";
@@ -50,19 +51,51 @@ const organizationJsonLd = {
 
 const localBusinessLd = localBusinessJsonLd();
 
+const seoKeywords: Record<string, string[]> = {
+  ru: [
+    "NEOCAR",
+    "погрузчики Молдова",
+    "аренда погрузчика Кишинёв",
+    "продажа погрузчиков",
+    "сервис погрузчиков",
+    "запчасти погрузчик",
+    "складская техника",
+  ],
+  ro: [
+    "NEOCAR",
+    "stivuitoare Moldova",
+    "închiriere stivuitor Chișinău",
+    "vânzări stivuitoare",
+    "service stivuitoare",
+    "piese stivuitoare",
+  ],
+  en: [
+    "NEOCAR",
+    "forklifts Moldova",
+    "forklift rental Chișinău",
+    "forklift sales",
+    "forklift service",
+    "forklift parts",
+    "warehouse equipment",
+  ],
+};
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Meta" });
   const ogLocale =
     locale === "ru" ? "ru_MD" : locale === "ro" ? "ro_MD" : "en_US";
+  const keywords = seoKeywords[locale] ?? seoKeywords.ru;
 
   return {
     title: t("title"),
     description: t("description"),
+    keywords,
     metadataBase: new URL(SITE_ORIGIN),
     alternates: {
       canonical: `${SITE_ORIGIN}/${locale}`,
       languages: {
+        "x-default": `${SITE_ORIGIN}/ru`,
         ru: `${SITE_ORIGIN}/ru`,
         ro: `${SITE_ORIGIN}/ro`,
         en: `${SITE_ORIGIN}/en`,
@@ -100,6 +133,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function Home({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const faqLd = faqPageJsonLd(locale);
 
   return (
     <>
@@ -115,6 +149,13 @@ export default async function Home({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(localBusinessLd),
+        }}
+      />
+      <Script
+        id="faq-jsonld"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(faqLd),
         }}
       />
       <div className="flex min-h-screen flex-col bg-zinc-950 text-white">
