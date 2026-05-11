@@ -37,7 +37,7 @@ export default function ComparisonSection() {
                       {r.feature}
                     </td>
                     <td className="px-4 py-3 text-white/65">{r.other}</td>
-                    <td className="px-4 py-3 font-semibold text-emerald-300">
+                    <td className="px-4 py-3 font-semibold text-accent-soft">
                       {r.us}
                     </td>
                   </tr>

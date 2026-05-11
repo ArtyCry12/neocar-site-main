@@ -14,7 +14,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="border-t border-white/10 bg-gradient-to-b from-[#140428] via-[#1b0b38] to-[#090912] text-white">
+    <footer className="border-t border-accent-burnt/20 bg-gradient-to-b from-[#0a0a0a] via-[#1A1A1A] to-[#0a0a0a] text-white">
       <div className="mx-auto flex max-w-6xl flex-col gap-10 px-4 py-14 md:flex-row md:justify-between md:px-8">
         <div className="max-w-md space-y-4">
           <div className="flex items-center gap-3">

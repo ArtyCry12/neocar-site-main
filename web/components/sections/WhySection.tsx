@@ -25,7 +25,7 @@ export default function WhySection() {
             return (
               <div
                 key={r.advantage}
-                className="rounded-3xl border border-white/10 bg-gradient-to-br from-white/10 to-transparent p-6"
+                className="rounded-3xl border border-accent-burnt/25 bg-[image:var(--background-image-card-gradient)] p-6 backdrop-blur-md"
               >
                 <div className="text-lg font-semibold text-white">{r.advantage}</div>
                 <p className="mt-3 text-sm leading-relaxed text-white/70">
@@ -36,7 +36,7 @@ export default function WhySection() {
           })}
         </div>
 
-        <blockquote className="mt-14 rounded-3xl border border-red-500/30 bg-red-500/10 px-6 py-5 text-base italic text-white/85 md:text-lg">
+        <blockquote className="mt-14 rounded-3xl border border-accent-burnt/30 bg-accent-burnt/10 px-6 py-5 text-base italic text-white/85 md:text-lg">
           {t("quote")}
         </blockquote>
       </div>

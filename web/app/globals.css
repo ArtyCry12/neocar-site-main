@@ -8,8 +8,13 @@
   --border: rgba(255, 255, 255, 0.1);
   --popover: #18181b;
   --popover-foreground: #fafafa;
-  --primary: #dc2626;
-  --ring: rgba(248, 113, 113, 0.45);
+  --accent-burnt: #e29303;
+  --accent-amber: #fdad1c;
+  --accent-soft: #fec04d;
+  --base-charcoal: #404040;
+  --base-slate: #595959;
+  --primary: var(--accent-burnt);
+  --ring: rgba(253, 173, 28, 0.45);
 }
 
 @theme inline {
@@ -24,6 +29,22 @@
   --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
   --color-ring: var(--ring);
+  --color-accent-burnt: var(--accent-burnt);
+  --color-accent-amber: var(--accent-amber);
+  --color-accent-soft: var(--accent-soft);
+  --color-base-charcoal: var(--base-charcoal);
+  --color-base-slate: var(--base-slate);
+  --background-image-site-gradient: linear-gradient(
+    135deg,
+    #fec04d 0%,
+    #fdad1c 40%,
+    #e29303 100%
+  );
+  --background-image-card-gradient: linear-gradient(
+    180deg,
+    #1a1a1a 0%,
+    #404040 100%
+  );
 }
 
 body {

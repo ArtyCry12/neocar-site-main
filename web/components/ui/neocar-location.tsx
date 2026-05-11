@@ -84,7 +84,7 @@ export default function NeocarLocation({ className = "" }: NeocarLocationProps) 
 
           <div className="w-full max-w-3xl rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md">
             <div className="flex items-start gap-4">
-              <div className="shrink-0 rounded-full bg-red-600 p-3">
+              <div className="shrink-0 rounded-full bg-accent-burnt p-3">
                 <MapPin className="h-6 w-6 text-white" />
               </div>
               <div className="flex-1">

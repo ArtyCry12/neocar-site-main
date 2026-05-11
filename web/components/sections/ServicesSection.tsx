@@ -23,9 +23,9 @@ export default function ServicesSection() {
           {serviceLines.map((row, idx) => (
             <li
               key={idx}
-              className="flex gap-4 rounded-3xl border border-white/10 bg-zinc-950/70 p-5"
+              className="flex gap-4 rounded-3xl border border-accent-burnt/20 bg-[image:var(--background-image-card-gradient)] p-5 backdrop-blur-md"
             >
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-red-600 text-sm font-bold text-white">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-accent-burnt text-sm font-bold text-white">
                 {idx + 1}
               </span>
               <p className="text-sm leading-relaxed text-white/75">

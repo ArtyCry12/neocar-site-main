@@ -26,7 +26,7 @@ export default function AnnouncementBanner() {
   if (!visible) return null;
 
   return (
-    <div className="border-b border-white/10 bg-red-600/95 px-4 py-2 text-center text-xs text-white md:text-sm">
+    <div className="border-b border-white/10 bg-accent-burnt/95 px-4 py-2 text-center text-xs text-white md:text-sm">
       <div className="mx-auto flex max-w-5xl items-center justify-center gap-3">
         <p className="flex-1">{t("text")}</p>
         <button

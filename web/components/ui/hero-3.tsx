@@ -27,7 +27,7 @@ const ActionButton = ({
     whileHover={{ scale: 1.05 }}
     whileTap={{ scale: 0.95 }}
     onClick={onClick}
-    className="mt-8 rounded-full bg-red-600 px-8 py-3 font-semibold text-white shadow-lg transition-colors hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-red-400/75"
+    className="mt-8 rounded-full bg-accent-burnt px-8 py-3 font-semibold text-white shadow-lg transition-colors hover:bg-accent-amber focus:outline-none focus:ring-2 focus:ring-accent-amber/75"
   >
     {children}
   </motion.button>

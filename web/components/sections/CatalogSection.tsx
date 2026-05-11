@@ -28,7 +28,7 @@ export default function CatalogSection() {
             return (
               <article
                 key={item.title}
-                className="flex flex-col rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-md"
+                className="flex flex-col rounded-3xl border border-accent-burnt/25 bg-[image:var(--background-image-card-gradient)] p-6 backdrop-blur-md"
               >
                 <h3 className="text-lg font-semibold text-white">{item.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-white/70">

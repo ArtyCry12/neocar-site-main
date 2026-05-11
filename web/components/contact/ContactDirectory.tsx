@@ -37,7 +37,7 @@ export default function ContactDirectory() {
           return (
             <div key={group.id} className="space-y-4">
               <div className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.14em] text-white/45">
-                <Icon className="h-4 w-4 text-red-500/90" aria-hidden />
+                <Icon className="h-4 w-4 text-accent-amber/90" aria-hidden />
                 <span>{t(group.titleKey)}</span>
               </div>
               <div className="grid gap-4 md:grid-cols-2">

@@ -53,12 +53,12 @@ export default function AboutSection() {
           {tiles.map((tile) => (
             <div
               key={tile.label}
-              className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-md"
+              className="rounded-2xl border border-accent-burnt/25 bg-[image:var(--background-image-card-gradient)] p-5 backdrop-blur-md"
             >
               <div className="text-xs uppercase tracking-wide text-white/45">
                 {tile.label}
               </div>
-              <div className="mt-2 text-3xl font-semibold text-white">
+              <div className="mt-2 text-3xl font-semibold text-accent-amber">
                 {tile.value}
               </div>
               <div className="mt-2 text-sm text-white/65">{tile.hint}</div>

@@ -27,10 +27,10 @@ export default function TestimonialsSection() {
             return (
               <article
                 key={item.name}
-                className="flex flex-col rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-md"
+                className="flex flex-col rounded-3xl border border-accent-burnt/25 bg-[image:var(--background-image-card-gradient)] p-6 backdrop-blur-md"
               >
                 <Quote
-                  className="mb-4 h-8 w-8 shrink-0 text-red-500/90"
+                  className="mb-4 h-8 w-8 shrink-0 text-accent-amber/90"
                   aria-hidden
                 />
                 <blockquote className="flex-1 text-sm leading-relaxed text-white/80">
