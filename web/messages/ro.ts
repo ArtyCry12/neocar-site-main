@@ -119,12 +119,6 @@ const ro = {
     colOther: "Concurent",
     colUs: "NEOCAR",
   },
-  Team: {
-    title: "Echipa",
-    sales: "Vânzări tehnică",
-    parts: "Piese",
-    service: "Service",
-  },
   Testimonials: {
     title: "Feedback clienți",
     subtitle:

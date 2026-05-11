@@ -16,7 +16,6 @@ import ContactSection from "@/components/sections/ContactSection";
 import HeroPhotoMarqueeSection from "@/components/sections/HeroPhotoMarqueeSection";
 import ImageAutoSliderSection from "@/components/sections/ImageAutoSliderSection";
 import ServicesSection from "@/components/sections/ServicesSection";
-import TeamSection from "@/components/sections/TeamSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import WhySection from "@/components/sections/WhySection";
 
@@ -130,7 +129,6 @@ export default async function Home({ params }: Props) {
         <WhySection />
         <ComparisonSection />
         <TestimonialsSection />
-        <TeamSection />
         <ContactSection />
         <Footer />
         <DockNav />

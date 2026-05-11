@@ -119,12 +119,6 @@ const en = {
     colOther: "Competitor",
     colUs: "NEOCAR",
   },
-  Team: {
-    title: "Team",
-    sales: "Equipment sales",
-    parts: "Parts desk",
-    service: "Service desk",
-  },
   Testimonials: {
     title: "Client feedback",
     subtitle:

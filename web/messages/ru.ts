@@ -119,12 +119,6 @@ const ru = {
     colOther: "Конкурент",
     colUs: "NEOCAR",
   },
-  Team: {
-    title: "Команда",
-    sales: "Отдел продаж техники",
-    parts: "Отдел запчастей",
-    service: "Сервис и обслуживание",
-  },
   Testimonials: {
     title: "Отзывы клиентов",
     subtitle:
