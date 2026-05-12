@@ -20,13 +20,13 @@ function SplitCard({
     <div className="overflow-hidden rounded-2xl border border-accent-burnt/30 bg-[image:var(--background-image-card-gradient)] shadow-lg backdrop-blur-md">
       <div className="grid min-h-[200px] grid-cols-1 sm:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]">
         <div className="border-b border-accent-burnt/30 bg-[image:var(--background-image-typical-warm-gradient)] p-5 sm:border-b-0">
-          <span className="inline-flex rounded-full bg-white/8 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.15em] text-white/40">
+          <span className="inline-flex rounded-full border border-zinc-400/50 bg-white/60 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.15em] text-zinc-700">
             {typicalLabel}
           </span>
-          <p className="mt-3 text-sm leading-relaxed text-white/65">{typical}</p>
+          <p className="mt-3 text-sm leading-relaxed text-zinc-800">{typical}</p>
         </div>
         <div
-          className="hidden w-px shrink-0 self-stretch bg-gradient-to-b from-transparent via-[#FF8D21]/50 to-transparent sm:block"
+          className="hidden w-px shrink-0 self-stretch bg-gradient-to-b from-transparent via-zinc-400/40 to-transparent sm:block"
           aria-hidden
         />
         <div className="bg-[image:var(--background-image-us-gradient)] p-5">
