@@ -38,7 +38,7 @@ export default function DockNav() {
         initial={{ y: 24, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ type: "spring", stiffness: 260, damping: 22 }}
-        className="pointer-events-auto flex items-center gap-1 rounded-2xl border border-accent-burnt/20 bg-[#1A1A1A]/90 px-2 py-2 shadow-2xl shadow-black/40 backdrop-blur-xl"
+        className="pointer-events-auto flex items-center gap-1 rounded-2xl border border-accent-burnt/20 bg-[#1A1A1A]/90 px-2 py-2 shadow-2xl shadow-black/40 backdrop-blur-lg"
       >
         {ITEMS.map((item) => {
           const Icon = item.icon;

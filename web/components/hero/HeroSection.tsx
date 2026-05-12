@@ -15,7 +15,7 @@ const HeroCanvas = dynamic(() => import("./HeroCanvas"), {
 });
 
 const STAGE_COUNT = 4;
-const CAROUSEL_MS = 3000;
+const CAROUSEL_MS = 4500;
 
 export default function HeroSection({
   copy,
@@ -26,6 +26,15 @@ export default function HeroSection({
   const reduceMotion = useReducedMotion();
   const [active, setActive] = useState(true);
   const [stageIdx, setStageIdx] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 1023px)");
+    const apply = () => setIsMobile(mq.matches);
+    apply();
+    mq.addEventListener("change", apply);
+    return () => mq.removeEventListener("change", apply);
+  }, []);
 
   useEffect(() => {
     const el = sectionRef.current;
@@ -81,7 +90,7 @@ export default function HeroSection({
             className="pointer-events-none absolute inset-x-4 top-0 z-[6] h-px bg-gradient-to-r from-transparent via-[#FF8D21]/25 to-transparent lg:hidden"
             aria-hidden
           />
-          <HeroCanvas active={active} />
+          <HeroCanvas active={active} isMobile={isMobile} />
           <HeroOrbitItems stageIdx={effectiveStage} />
         </div>
       </div>

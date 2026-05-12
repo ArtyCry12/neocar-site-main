@@ -59,7 +59,7 @@ function renderMobileItem(
     return (
       <div
         key={key}
-        className="absolute flex items-center justify-center rounded-full border border-accent-burnt/25 bg-black/45 shadow-lg backdrop-blur-md"
+        className="absolute flex items-center justify-center rounded-full border border-accent-burnt/25 bg-black/45 shadow-lg backdrop-blur-sm"
         style={{
           ...posStyle,
           width: size,
@@ -196,7 +196,7 @@ export default function HeroOrbitItems({
               return (
                 <div
                   key={`${stage.id}-icon-${idx}`}
-                  className="absolute flex items-center justify-center rounded-full border border-accent-burnt/25 bg-black/45 shadow-lg backdrop-blur-md"
+                  className="absolute flex items-center justify-center rounded-full border border-accent-burnt/25 bg-black/45 shadow-lg backdrop-blur-sm"
                   style={{
                     width: size,
                     height: size,

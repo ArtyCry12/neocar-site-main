@@ -24,6 +24,29 @@ export default function HeroStageCopy({ stageIdx }: { stageIdx: number }) {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const listVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: reduceMotion ? 0 : 0.055,
+        delayChildren: reduceMotion ? 0 : 0.04,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, x: -8 },
+    show: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: reduceMotion ? 0 : 0.28,
+        ease: "easeOut" as const,
+      },
+    },
+  };
+
   return (
     <div className="relative z-10 flex min-h-[55svh] w-full flex-1 flex-col justify-between px-5 pb-6 pt-4 text-center lg:min-h-[100svh] lg:px-8 lg:pb-24 lg:pt-24 lg:text-left">
       <div className="flex max-w-xl flex-col items-center lg:items-start">
@@ -31,31 +54,51 @@ export default function HeroStageCopy({ stageIdx }: { stageIdx: number }) {
           {tHero("badge")}
         </span>
         <div aria-live="polite" className="relative w-full">
-          <AnimatePresence mode="wait" initial={false}>
+          <AnimatePresence mode="popLayout" initial={false}>
             <motion.div
               key={stageKey}
-              initial={{ opacity: 0, y: reduceMotion ? 0 : 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: reduceMotion ? 0 : -6 }}
+              layout
+              initial={{
+                opacity: 0,
+                filter: reduceMotion ? "blur(0px)" : "blur(10px)",
+                y: reduceMotion ? 0 : 12,
+              }}
+              animate={{
+                opacity: 1,
+                filter: "blur(0px)",
+                y: 0,
+              }}
+              exit={{
+                opacity: 0,
+                filter: reduceMotion ? "blur(0px)" : "blur(6px)",
+                y: reduceMotion ? 0 : -8,
+              }}
               transition={{
-                duration: reduceMotion ? 0 : 0.28,
-                ease: [0.22, 1, 0.36, 1],
+                duration: reduceMotion ? 0 : 0.38,
+                ease: [0.25, 0.46, 0.45, 0.94],
+                filter: { duration: reduceMotion ? 0 : 0.32 },
               }}
             >
               <h1 className="text-balance bg-gradient-to-r from-[#FFB76B] via-[#FF8D21] to-[#FF7B00] bg-clip-text text-2xl font-bold tracking-tight text-transparent md:text-3xl lg:text-5xl">
                 {title}
               </h1>
-              <ul className="mt-4 space-y-2 text-sm text-white/75 md:text-base lg:text-left">
+              <motion.ul
+                className="mt-4 space-y-2 text-sm text-white/75 md:text-base lg:text-left"
+                variants={listVariants}
+                initial="hidden"
+                animate="show"
+              >
                 {bullets.map((line, i) => (
-                  <li
+                  <motion.li
                     key={i}
+                    variants={itemVariants}
                     className="flex items-start justify-center gap-2.5 lg:justify-start"
                   >
                     <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent-amber" />
                     <span className="text-left">{line}</span>
-                  </li>
+                  </motion.li>
                 ))}
-              </ul>
+              </motion.ul>
             </motion.div>
           </AnimatePresence>
         </div>

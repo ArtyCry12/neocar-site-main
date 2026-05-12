@@ -58,7 +58,13 @@ function ForkliftPlaceholder({ active }: { active: boolean }) {
   );
 }
 
-function ForkliftGLB({ active }: { active: boolean }) {
+function ForkliftGLB({
+  active,
+  isMobile,
+}: {
+  active: boolean;
+  isMobile: boolean;
+}) {
   const { scene } = useGLTF(MODEL_URL);
   const group = useRef<THREE.Group>(null);
 
@@ -76,10 +82,10 @@ function ForkliftGLB({ active }: { active: boolean }) {
     root.position.sub(center);
     const size = box.getSize(new THREE.Vector3());
     const maxDim = Math.max(size.x, size.y, size.z, 0.001);
-    const target = 3.25;
+    const target = isMobile ? 4.4 : 3.25;
     root.scale.setScalar(target / maxDim);
     return root;
-  }, [scene]);
+  }, [scene, isMobile]);
 
   useEffect(() => {
     if (group.current) {
@@ -101,9 +107,10 @@ function ForkliftGLB({ active }: { active: boolean }) {
 
 type Props = {
   active: boolean;
+  isMobile?: boolean;
 };
 
-export default function HeroCanvas({ active }: Props) {
+export default function HeroCanvas({ active, isMobile = false }: Props) {
   const [can3D, setCan3D] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
 
@@ -140,12 +147,15 @@ export default function HeroCanvas({ active }: Props) {
 
   const dprMax = isDesktop ? 1.5 : 1;
   const showShadowsAndHemi = isDesktop;
+  const camera = isMobile
+    ? { position: [0, 0.75, 3.8] as const, fov: 40 }
+    : { position: [0, 1.0, 5.5] as const, fov: 44 };
 
   return (
     <div className="pointer-events-none relative h-full min-h-[50svh] w-full lg:min-h-[100svh]">
       <Canvas
-        camera={{ position: [0, 1.0, 5.5], fov: 44 }}
-        gl={{ antialias: true, alpha: true }}
+        camera={camera}
+        gl={{ antialias: isDesktop, alpha: true }}
         className="h-full w-full min-h-[50svh]"
         dpr={[1, dprMax]}
       >
@@ -166,8 +176,8 @@ export default function HeroCanvas({ active }: Props) {
         <Suspense
           fallback={
             <mesh position={[0, -0.65, 0]}>
-              <icosahedronGeometry args={[0.8, 1]} />
-              <meshStandardMaterial color="#27272a" wireframe />
+              <boxGeometry args={[0.01, 0.01, 0.01]} />
+              <meshBasicMaterial transparent opacity={0} />
             </mesh>
           }
         >
@@ -183,7 +193,7 @@ export default function HeroCanvas({ active }: Props) {
           ) : null}
           <ErrorBoundary fallback={<ForkliftPlaceholder active={active} />}>
             {useModel ? (
-              <ForkliftGLB active={active} />
+              <ForkliftGLB active={active} isMobile={isMobile} />
             ) : (
               <ForkliftPlaceholder active={active} />
             )}
@@ -193,3 +203,5 @@ export default function HeroCanvas({ active }: Props) {
     </div>
   );
 }
+
+useGLTF.preload(MODEL_URL);

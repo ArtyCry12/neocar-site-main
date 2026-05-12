@@ -4,7 +4,7 @@ export function canRender3D(): boolean {
     return false;
   }
   const mem = (navigator as Navigator & { deviceMemory?: number }).deviceMemory;
-  if (mem !== undefined && mem < 4) {
+  if (mem !== undefined && mem < 2) {
     return false;
   }
   try {

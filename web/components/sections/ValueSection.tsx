@@ -17,23 +17,26 @@ function SplitCard({
   usLabel: string;
 }) {
   return (
-    <div className="overflow-hidden rounded-3xl border border-accent-burnt/30 bg-[image:var(--background-image-card-gradient)] shadow-lg backdrop-blur-md">
+    <div className="overflow-hidden rounded-2xl border border-accent-burnt/30 bg-[image:var(--background-image-card-gradient)] shadow-lg backdrop-blur-md">
       <div className="grid min-h-[200px] grid-cols-1 sm:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]">
         <div className="border-b border-accent-burnt/30 p-5 sm:border-b-0">
-          <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-white/50">
+          <span className="inline-flex rounded-full bg-white/8 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.15em] text-white/40">
             {typicalLabel}
-          </div>
-          <p className="mt-3 text-sm leading-relaxed text-white/70">{typical}</p>
+          </span>
+          <p className="mt-3 text-sm leading-relaxed text-white/65">{typical}</p>
         </div>
         <div
           className="hidden w-px shrink-0 self-stretch bg-gradient-to-b from-transparent via-[#FF8D21]/50 to-transparent sm:block"
           aria-hidden
         />
         <div className="bg-[image:var(--background-image-us-gradient)] p-5">
-          <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-white">
-            {usLabel}
+          <div className="mb-3 flex items-center gap-1.5">
+            <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-orange-vivid" />
+            <span className="font-mono text-xs font-bold uppercase tracking-[0.18em] text-white">
+              {usLabel}
+            </span>
           </div>
-          <p className="mt-3 text-sm font-semibold leading-relaxed text-white">{us}</p>
+          <p className="text-base font-bold leading-snug text-white">{us}</p>
         </div>
       </div>
     </div>
