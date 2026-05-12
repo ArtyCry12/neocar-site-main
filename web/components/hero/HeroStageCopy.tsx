@@ -25,12 +25,12 @@ export default function HeroStageCopy({ stageIdx }: { stageIdx: number }) {
   };
 
   return (
-    <div className="relative z-10 flex min-h-[55svh] w-full flex-1 flex-col justify-between px-5 pb-20 pt-10 lg:min-h-[100svh] lg:px-8 lg:pb-24 lg:pt-24">
-      <div className="flex max-w-xl flex-col items-start text-left">
-        <span className="mb-4 inline-flex rounded-full border border-accent-burnt/30 bg-black/35 px-4 py-1 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-accent-amber/90 backdrop-blur-sm">
+    <div className="relative z-10 flex min-h-[55svh] w-full flex-1 flex-col justify-between px-5 pb-6 pt-4 text-center lg:min-h-[100svh] lg:px-8 lg:pb-24 lg:pt-24 lg:text-left">
+      <div className="flex max-w-xl flex-col items-center lg:items-start">
+        <span className="mb-4 inline-flex self-center rounded-full border border-accent-burnt/30 bg-black/35 px-4 py-1 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-accent-amber/90 backdrop-blur-sm lg:self-start">
           {tHero("badge")}
         </span>
-        <div aria-live="polite" className="relative">
+        <div aria-live="polite" className="relative w-full">
           <AnimatePresence mode="wait" initial={false}>
             <motion.div
               key={stageKey}
@@ -42,21 +42,24 @@ export default function HeroStageCopy({ stageIdx }: { stageIdx: number }) {
                 ease: [0.22, 1, 0.36, 1],
               }}
             >
-              <h1 className="text-balance bg-gradient-to-r from-[#FEC04D] via-[#FDAD1C] to-[#E29303] bg-clip-text text-2xl font-bold tracking-tight text-transparent md:text-3xl lg:text-5xl">
+              <h1 className="text-balance bg-gradient-to-r from-[#FFB76B] via-[#FF8D21] to-[#FF7B00] bg-clip-text text-2xl font-bold tracking-tight text-transparent md:text-3xl lg:text-5xl">
                 {title}
               </h1>
-              <ul className="mt-4 space-y-2 text-sm text-white/75 md:text-base">
+              <ul className="mt-4 space-y-2 text-sm text-white/75 md:text-base lg:text-left">
                 {bullets.map((line, i) => (
-                  <li key={i} className="flex items-start gap-2.5">
+                  <li
+                    key={i}
+                    className="flex items-start justify-center gap-2.5 lg:justify-start"
+                  >
                     <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent-amber" />
-                    <span>{line}</span>
+                    <span className="text-left">{line}</span>
                   </li>
                 ))}
               </ul>
             </motion.div>
           </AnimatePresence>
         </div>
-        <div className="mt-4 flex w-full max-w-md items-center gap-2">
+        <div className="mt-4 flex w-full max-w-md items-center justify-center gap-2 lg:justify-start">
           {Array.from({ length: STAGE_COUNT }).map((_, i) => (
             <span
               key={i}
@@ -69,14 +72,20 @@ export default function HeroStageCopy({ stageIdx }: { stageIdx: number }) {
             />
           ))}
         </div>
-        <div className="mt-8 flex w-full flex-col gap-3 sm:flex-row sm:flex-wrap">
-          <Button size="lg" type="button" onClick={() => scrollToId("contact")}>
+        <div className="mt-6 flex w-full flex-col gap-3 sm:flex-row sm:flex-wrap lg:mt-8">
+          <Button
+            size="lg"
+            type="button"
+            className="w-full sm:w-auto"
+            onClick={() => scrollToId("contact")}
+          >
             {tHero("ctaPrimary")}
           </Button>
           <Button
             size="lg"
             variant="outline"
             type="button"
+            className="w-full sm:w-auto"
             onClick={() => scrollToId("catalog")}
           >
             {tHero("ctaSecondary")}
@@ -84,7 +93,7 @@ export default function HeroStageCopy({ stageIdx }: { stageIdx: number }) {
         </div>
       </div>
 
-      <div className="flex flex-col gap-6 px-0 pt-10 md:flex-row md:items-end md:justify-between lg:px-1">
+      <div className="hidden flex-col gap-6 px-0 pt-10 md:flex-row md:items-end md:justify-between lg:flex lg:px-1">
         <SocialProof />
         <p className="max-w-sm text-xs leading-relaxed text-white/50 lg:text-right">
           {tHero("hint")}

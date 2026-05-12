@@ -18,18 +18,22 @@ function SplitCard({
 }) {
   return (
     <div className="overflow-hidden rounded-3xl border border-accent-burnt/30 bg-[image:var(--background-image-card-gradient)] shadow-lg backdrop-blur-md">
-      <div className="grid min-h-[200px] grid-cols-1 sm:grid-cols-2">
-        <div className="border-b border-accent-burnt/30 p-5 sm:border-b-0 sm:border-r sm:border-accent-burnt/40">
+      <div className="grid min-h-[200px] grid-cols-1 sm:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]">
+        <div className="border-b border-accent-burnt/30 p-5 sm:border-b-0">
           <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-white/50">
             {typicalLabel}
           </div>
           <p className="mt-3 text-sm leading-relaxed text-white/70">{typical}</p>
         </div>
-        <div className="bg-accent-burnt/10 p-5">
-          <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent-amber">
+        <div
+          className="hidden w-px shrink-0 self-stretch bg-gradient-to-b from-transparent via-[#FF8D21]/50 to-transparent sm:block"
+          aria-hidden
+        />
+        <div className="bg-[image:var(--background-image-us-gradient)] p-5">
+          <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-white">
             {usLabel}
           </div>
-          <p className="mt-3 text-sm font-medium leading-relaxed text-white/90">{us}</p>
+          <p className="mt-3 text-sm font-semibold leading-relaxed text-white">{us}</p>
         </div>
       </div>
     </div>
@@ -43,7 +47,7 @@ export default function ValueSection() {
   return (
     <section
       id="value"
-      className="scroll-mt-28 border-t border-white/5 bg-zinc-950 py-20 md:py-28"
+      className="scroll-mt-28 border-t border-white/5 bg-gradient-to-b from-zinc-950 via-[#110F06] to-zinc-950 py-20 md:py-28"
     >
       <div className="mx-auto max-w-6xl px-4 md:px-8">
         <div className="max-w-3xl">

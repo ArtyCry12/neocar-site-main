@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 :root {
+  scroll-behavior: smooth;
   --background: #09090b;
   --foreground: #fafafa;
   --muted: #a1a1aa;
@@ -8,13 +9,21 @@
   --border: rgba(255, 255, 255, 0.1);
   --popover: #18181b;
   --popover-foreground: #fafafa;
-  --accent-burnt: #e29303;
-  --accent-amber: #fdad1c;
-  --accent-soft: #fec04d;
+  /* Orange scale — новая основная палитра */
+  --orange-vivid: #ff7b00;
+  --orange-warm: #ff8d21;
+  --orange-medium: #ffa652;
+  --orange-light: #ffb76b;
+  --orange-pale: #ffcd90;
+  --orange-cream: #fff4df;
+  /* Semantic aliases — совместимость с Tailwind accent-* */
+  --accent-burnt: var(--orange-vivid);
+  --accent-amber: var(--orange-warm);
+  --accent-soft: var(--orange-medium);
   --base-charcoal: #404040;
   --base-slate: #595959;
   --primary: var(--accent-burnt);
-  --ring: rgba(253, 173, 28, 0.45);
+  --ring: rgba(255, 141, 33, 0.45);
 }
 
 @theme inline {
@@ -32,18 +41,31 @@
   --color-accent-burnt: var(--accent-burnt);
   --color-accent-amber: var(--accent-amber);
   --color-accent-soft: var(--accent-soft);
+  --color-orange-vivid: var(--orange-vivid);
+  --color-orange-warm: var(--orange-warm);
+  --color-orange-medium: var(--orange-medium);
+  --color-orange-light: var(--orange-light);
+  --color-orange-pale: var(--orange-pale);
+  --color-orange-cream: var(--orange-cream);
   --color-base-charcoal: var(--base-charcoal);
   --color-base-slate: var(--base-slate);
   --background-image-site-gradient: linear-gradient(
     135deg,
-    #fec04d 0%,
-    #fdad1c 40%,
-    #e29303 100%
+    var(--orange-light) 0%,
+    var(--orange-warm) 40%,
+    var(--orange-vivid) 100%
   );
   --background-image-card-gradient: linear-gradient(
     180deg,
-    #1a1a1a 0%,
-    #404040 100%
+    #1c1a14 0%,
+    #2a2418 60%,
+    #332d1e 100%
+  );
+  --background-image-us-gradient: linear-gradient(
+    135deg,
+    #ff8d21 0%,
+    #ff7b00 50%,
+    #c45a00 100%
   );
 }
 
@@ -67,5 +89,6 @@ html.lenis body {
 }
 
 .animate-neo-marquee {
+  will-change: transform;
   animation: neo-marquee 26s linear infinite;
 }

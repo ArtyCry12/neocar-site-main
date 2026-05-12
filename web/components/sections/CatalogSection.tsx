@@ -1,18 +1,19 @@
 "use client";
 
+import React from "react";
 import { useLocale, useTranslations } from "next-intl";
 
 import { catalogCards } from "@/content/catalog";
 import { pickLocale } from "@/content/types";
 
-export default function CatalogSection() {
+const CatalogSection = function CatalogSection() {
   const t = useTranslations("Catalog");
   const locale = useLocale();
 
   return (
     <section
       id="catalog"
-      className="scroll-mt-28 border-t border-white/5 bg-gradient-to-b from-zinc-950 via-zinc-950 to-black py-20 md:py-28"
+      className="scroll-mt-28 border-t border-white/5 bg-gradient-to-b from-zinc-950 via-[#111008] to-black py-20 md:py-28"
     >
       <div className="mx-auto max-w-6xl px-4 md:px-8">
         <div className="max-w-3xl">
@@ -43,4 +44,6 @@ export default function CatalogSection() {
       </div>
     </section>
   );
-}
+};
+
+export default React.memo(CatalogSection);

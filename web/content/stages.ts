@@ -90,7 +90,7 @@ const stageBases = [
       ],
     },
     background:
-      "linear-gradient(135deg, rgb(10 10 12 / 0.92), rgb(26 26 26 / 0.75), rgb(226 147 3 / 0.18))",
+      "linear-gradient(135deg, rgb(10 10 12 / 0.92), rgb(26 26 26 / 0.75), rgba(255, 141, 33, 0.20))",
   },
   {
     id: "catalog",
@@ -130,7 +130,7 @@ const stageBases = [
       ],
     },
     background:
-      "linear-gradient(145deg, rgb(10 10 12 / 0.94), rgb(32 32 34 / 0.8), rgb(253 173 28 / 0.16))",
+      "linear-gradient(145deg, rgb(10 10 12 / 0.94), rgb(32 32 34 / 0.8), rgba(255, 141, 33, 0.18))",
   },
   {
     id: "service",
@@ -170,7 +170,7 @@ const stageBases = [
       ],
     },
     background:
-      "linear-gradient(155deg, rgb(10 10 12 / 0.93), rgb(26 26 26 / 0.78), rgb(254 192 77 / 0.14))",
+      "linear-gradient(155deg, rgb(10 10 12 / 0.93), rgb(26 26 26 / 0.78), rgba(255, 166, 82, 0.16))",
   },
   {
     id: "cta",
@@ -210,7 +210,7 @@ const stageBases = [
       ],
     },
     background:
-      "linear-gradient(160deg, rgb(10 10 12 / 0.95), rgb(64 64 64 / 0.35), rgb(226 147 3 / 0.2))",
+      "linear-gradient(160deg, rgb(10 10 12 / 0.95), rgb(64 64 64 / 0.35), rgba(255, 123, 0, 0.22))",
   },
 ] as const;
 

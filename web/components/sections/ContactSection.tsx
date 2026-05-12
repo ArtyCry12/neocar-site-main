@@ -16,7 +16,7 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="scroll-mt-28 border-t border-white/5 bg-black py-20 md:py-28"
+      className="scroll-mt-28 border-t border-white/5 bg-gradient-to-b from-black via-[#0A0907] to-black py-20 md:py-28"
     >
       <div className="mx-auto max-w-6xl px-4 md:px-8">
         <h2 className="text-3xl font-semibold tracking-tight text-white md:text-4xl">

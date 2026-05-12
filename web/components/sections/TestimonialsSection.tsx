@@ -1,19 +1,20 @@
 "use client";
 
+import React from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Quote } from "lucide-react";
 
 import { testimonials } from "@/content/testimonials";
 import { pickLocale } from "@/content/types";
 
-export default function TestimonialsSection() {
+const TestimonialsSection = function TestimonialsSection() {
   const t = useTranslations("Testimonials");
   const locale = useLocale();
 
   return (
     <section
       id="reviews"
-      className="scroll-mt-28 border-t border-white/5 bg-gradient-to-b from-black via-zinc-950 to-zinc-950 py-20 md:py-28"
+      className="scroll-mt-28 border-t border-white/5 bg-gradient-to-b from-[#0D0B05] via-zinc-950 to-zinc-950 py-20 md:py-28"
     >
       <div className="mx-auto max-w-6xl px-4 md:px-8">
         <h2 className="max-w-3xl text-3xl font-semibold tracking-tight text-white md:text-4xl">
@@ -47,4 +48,6 @@ export default function TestimonialsSection() {
       </div>
     </section>
   );
-}
+};
+
+export default React.memo(TestimonialsSection);

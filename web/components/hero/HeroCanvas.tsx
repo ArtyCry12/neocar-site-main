@@ -121,28 +121,6 @@ export default function HeroCanvas({ active }: Props) {
     };
   }, []);
 
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    if (!window.matchMedia("(min-width: 1024px)").matches) return;
-    const section = document.querySelector('[data-testid="home-hero"]');
-    if (!section) return;
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.intersectionRatio >= 0.15) {
-          try {
-            useGLTF.preload(MODEL_URL);
-          } catch {
-            /* ignore */
-          }
-          io.disconnect();
-        }
-      },
-      { threshold: [0.15] },
-    );
-    io.observe(section);
-    return () => io.disconnect();
-  }, []);
-
   const useModel = process.env.NEXT_PUBLIC_HERO_USE_GLB !== "false";
 
   if (!can3D) {
