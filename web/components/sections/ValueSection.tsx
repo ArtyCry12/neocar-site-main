@@ -32,11 +32,11 @@ function SplitCard({
         <div className="bg-[image:var(--background-image-us-gradient)] p-5">
           <div className="mb-3 flex items-center gap-1.5">
             <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-orange-vivid" />
-            <span className="font-mono text-xs font-bold uppercase tracking-[0.18em] text-white">
+            <span className="font-mono text-sm font-bold uppercase tracking-[0.14em] text-white">
               {usLabel}
             </span>
           </div>
-          <p className="text-base font-bold leading-snug text-white">{us}</p>
+          <p className="text-lg font-bold leading-snug text-white">{us}</p>
         </div>
       </div>
     </div>

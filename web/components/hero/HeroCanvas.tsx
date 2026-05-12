@@ -98,8 +98,9 @@ function ForkliftGLB({
     group.current.rotation.y += delta * 0.2;
   });
 
-  const y = isMobile ? -0.28 : -0.35;
-  const z = isMobile ? 0.06 : 0;
+  /* Mobile: lower on screen, less top clipping (desktop branch unchanged). */
+  const y = isMobile ? -0.5 : -0.35;
+  const z = isMobile ? 0.04 : 0;
 
   return (
     <group ref={group} position={[0, y, z]}>
@@ -135,7 +136,7 @@ export default function HeroCanvas({ active, isMobile = false }: Props) {
 
   if (!can3D) {
     return (
-      <div className="pointer-events-none relative h-full min-h-[50svh] w-full lg:min-h-[100svh]">
+      <div className="pointer-events-none relative h-full min-h-[58svh] w-full lg:min-h-[100svh]">
         <Image
           src="/media/hero/marquee-1.jpg"
           alt="NEOCAR — складская техника, фоновое фото"
@@ -151,15 +152,15 @@ export default function HeroCanvas({ active, isMobile = false }: Props) {
   const dprMax = isDesktop ? 1.5 : 1;
   const showShadowsAndHemi = isDesktop;
   const camera = isMobile
-    ? { position: [0, 0.75, 3.8] as const, fov: 40 }
+    ? { position: [0, 0.52, 4.45] as const, fov: 41 }
     : { position: [0, 1.0, 5.5] as const, fov: 44 };
 
   return (
-    <div className="pointer-events-none relative h-full min-h-[50svh] w-full lg:min-h-[100svh]">
+    <div className="pointer-events-none relative h-full min-h-[58svh] w-full lg:min-h-[100svh]">
       <Canvas
         camera={camera}
         gl={{ antialias: isDesktop, alpha: true }}
-        className="h-full w-full min-h-[50svh]"
+        className="h-full w-full min-h-[58svh] lg:min-h-[100svh]"
         dpr={[1, dprMax]}
       >
         <color attach="background" args={["#0a0a0a"]} />
