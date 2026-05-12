@@ -283,6 +283,8 @@ const en = {
     slideAlt1: "Slide — warehouse equipment on site",
     slideAlt2: "Slide — workshop diagnostics",
     slideAlt3: "Slide — freight handling",
+    momentFill1: "Slide — forklift on the yard, operations snapshot",
+    momentFill2: "Slide — warehouse floor and fleet, logistics snapshot",
     videoDeliveryAlt: "Muted clip — equipment delivery logistics",
     videoInspectionAlt: "Muted clip — inspection and diagnostics",
   },

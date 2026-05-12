@@ -5,8 +5,6 @@ import Image from "next/image";
 import { useReducedMotion } from "framer-motion";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
-import HeroOrbitItems from "@/components/hero/HeroOrbitItems";
-
 const HeroCanvas = dynamic(() => import("./HeroCanvas"), {
   ssr: false,
   loading: () => (
@@ -91,7 +89,6 @@ export default function HeroSection({
             aria-hidden
           />
           <HeroCanvas active={active} isMobile={isMobile} />
-          <HeroOrbitItems stageIdx={effectiveStage} />
         </div>
       </div>
 

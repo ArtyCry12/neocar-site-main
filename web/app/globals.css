@@ -61,18 +61,22 @@
     #2a2418 60%,
     #332d1e 100%
   );
-  /* «Обычно» — тёплый янтарно-коричневый, в той же гамме что и акценты */
+  /* «Обычно» — серо-белый градиент (контрастнее для продакшена) */
   --background-image-typical-warm-gradient: linear-gradient(
-    145deg,
-    #ff9d3a 0%,
-    #ff8d21 40%,
-    #c45a00 100%
+    152deg,
+    #52525b 0%,
+    #71717a 22%,
+    #a1a1aa 48%,
+    #e4e4e7 78%,
+    #fafafa 100%
   );
   --background-image-us-gradient: linear-gradient(
-    135deg,
-    #ff8d21 0%,
-    #ff7b00 50%,
-    #c45a00 100%
+    128deg,
+    #fff7ed 0%,
+    #ffedd5 14%,
+    var(--orange-pale) 30%,
+    var(--orange-warm) 56%,
+    var(--orange-vivid) 100%
   );
 }
 

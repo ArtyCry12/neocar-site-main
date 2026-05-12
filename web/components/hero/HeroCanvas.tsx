@@ -98,8 +98,11 @@ function ForkliftGLB({
     group.current.rotation.y += delta * 0.2;
   });
 
+  const y = isMobile ? -0.28 : -0.35;
+  const z = isMobile ? 0.06 : 0;
+
   return (
-    <group ref={group} position={[0, -0.35, 0]}>
+    <group ref={group} position={[0, y, z]}>
       <primitive object={model} />
     </group>
   );

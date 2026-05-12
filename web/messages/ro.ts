@@ -283,6 +283,8 @@ const ro = {
     slideAlt1: "Slide — tehnică pe platformă",
     slideAlt2: "Slide — service și diagnostic",
     slideAlt3: "Slide — manipulare mărfuri",
+    momentFill1: "Slide — stivuitor în curte, moment de lucru",
+    momentFill2: "Slide — depozit și utilaje, moment logistic",
     videoDeliveryAlt: "Clip mut — logistică livrare utilaje",
     videoInspectionAlt: "Clip mut — inspecție și diagnostic",
   },

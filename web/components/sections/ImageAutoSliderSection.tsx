@@ -10,17 +10,39 @@ type SliderAltKey =
   | "slideAlt2"
   | "slideAlt3"
   | "videoDeliveryAlt"
-  | "videoInspectionAlt";
+  | "videoInspectionAlt"
+  | "momentFill1"
+  | "momentFill2";
 
 type Slide =
   | { kind: "image"; src: string; altKey: SliderAltKey }
-  | { kind: "video"; src: string; altKey: SliderAltKey };
+  | { kind: "video"; src: string; altKey: SliderAltKey; poster?: string };
 
 const BASE_SLIDES: Slide[] = [
   { kind: "image", src: "/media/slider/slide-1.jpg", altKey: "slideAlt1" },
-  { kind: "video", src: "/media/video/delivery.mp4", altKey: "videoDeliveryAlt" },
+  {
+    kind: "video",
+    src: "/media/video/delivery.mp4",
+    altKey: "videoDeliveryAlt",
+    poster: "/media/hero/marquee-1.jpg",
+  },
+  {
+    kind: "image",
+    src: "/media/hero/marquee-3.jpg",
+    altKey: "momentFill1",
+  },
   { kind: "image", src: "/media/slider/slide-2.jpg", altKey: "slideAlt2" },
-  { kind: "video", src: "/media/video/inspection.mp4", altKey: "videoInspectionAlt" },
+  {
+    kind: "video",
+    src: "/media/video/inspection.mp4",
+    altKey: "videoInspectionAlt",
+    poster: "/media/hero/marquee-2.jpg",
+  },
+  {
+    kind: "image",
+    src: "/media/hero/marquee-4.jpg",
+    altKey: "momentFill2",
+  },
   { kind: "image", src: "/media/slider/slide-3.jpg", altKey: "slideAlt3" },
 ];
 
@@ -112,9 +134,10 @@ function SlideTile({
           ref={videoRef}
           className="h-full w-full object-cover"
           src={slide.src}
+          poster={slide.poster}
           muted
           playsInline
-          preload="metadata"
+          preload="auto"
           loop
           aria-label={alt}
         />
