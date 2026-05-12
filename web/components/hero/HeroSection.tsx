@@ -8,7 +8,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 const HeroCanvas = dynamic(() => import("./HeroCanvas"), {
   ssr: false,
   loading: () => (
-    <div className="relative h-full min-h-[58svh] w-full bg-[radial-gradient(circle_at_center,#18181b_0%,#050506_65%)] lg:min-h-[100svh]" />
+    <div className="relative h-full min-h-[70svh] w-full bg-[radial-gradient(circle_at_center,#18181b_0%,#050506_65%)] lg:min-h-[100svh]" />
   ),
 });
 
@@ -60,7 +60,7 @@ export default function HeroSection({
       ref={sectionRef}
       data-section="hero"
       data-testid="home-hero"
-      className="relative isolate min-h-[100svh] scroll-mt-20 overflow-hidden bg-[radial-gradient(ellipse_80%_55%_at_15%_0%,rgba(255,141,33,0.22)_0%,transparent_60%),radial-gradient(ellipse_50%_35%_at_90%_85%,rgba(196,90,0,0.18)_0%,transparent_50%),linear-gradient(165deg,#0F0E0A_0%,#1A1400_30%,#0C0C0C_65%,#070707_100%)]"
+      className="relative isolate min-h-[100svh] scroll-mt-20 overflow-visible lg:overflow-hidden bg-[radial-gradient(ellipse_80%_55%_at_15%_0%,rgba(255,141,33,0.22)_0%,transparent_60%),radial-gradient(ellipse_50%_35%_at_90%_85%,rgba(196,90,0,0.18)_0%,transparent_50%),linear-gradient(165deg,#0F0E0A_0%,#1A1400_30%,#0C0C0C_65%,#070707_100%)]"
     >
       <div className="pointer-events-none absolute inset-x-0 top-5 z-20 flex justify-center md:top-7">
         <div className="flex items-center gap-2.5 rounded-2xl border border-white/10 bg-black/40 px-4 py-2 backdrop-blur-md">
@@ -83,7 +83,7 @@ export default function HeroSection({
           {copy(effectiveStage)}
         </div>
 
-        <div className="relative order-last flex min-h-[72svh] flex-1 flex-col max-lg:justify-end lg:order-first lg:min-h-[100svh] lg:justify-start lg:flex-[1.15]">
+        <div className="relative order-last flex min-h-[82svh] flex-1 flex-col max-lg:justify-end lg:order-first lg:min-h-[100svh] lg:justify-start lg:flex-[1.15]">
           <div
             className="pointer-events-none absolute inset-x-4 top-0 z-[6] h-px bg-gradient-to-r from-transparent via-[#FF8D21]/25 to-transparent lg:hidden"
             aria-hidden
