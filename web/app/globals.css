@@ -64,10 +64,9 @@
   /* «Обычно» — тёплый янтарно-коричневый, в той же гамме что и акценты */
   --background-image-typical-warm-gradient: linear-gradient(
     145deg,
-    #141006 0%,
-    #221808 38%,
-    rgba(196, 90, 0, 0.12) 72%,
-    #2e1e12 100%
+    #ff9d3a 0%,
+    #ff8d21 40%,
+    #c45a00 100%
   );
   --background-image-us-gradient: linear-gradient(
     135deg,

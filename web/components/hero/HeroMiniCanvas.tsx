@@ -26,7 +26,7 @@ function MiniForklift() {
     root.position.sub(center);
     const size = box.getSize(new THREE.Vector3());
     const maxDim = Math.max(size.x, size.y, size.z, 0.001);
-    root.scale.setScalar(1.0 / maxDim);
+    root.scale.setScalar(1.25 / maxDim);
     return root;
   }, [scene]);
 
