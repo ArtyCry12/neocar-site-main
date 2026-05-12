@@ -26,7 +26,7 @@ function MiniForklift() {
     root.position.sub(center);
     const size = box.getSize(new THREE.Vector3());
     const maxDim = Math.max(size.x, size.y, size.z, 0.001);
-    root.scale.setScalar(0.82 / maxDim);
+    root.scale.setScalar(1.0 / maxDim);
     return root;
   }, [scene]);
 
@@ -39,7 +39,7 @@ function MiniForklift() {
   });
 
   return (
-    <group ref={group} position={[0, -0.38, 0]}>
+    <group ref={group} position={[0, 0, 0]}>
       <primitive object={model} />
     </group>
   );
@@ -76,7 +76,7 @@ export default function HeroMiniCanvas() {
   return (
     <div className="pointer-events-none fixed bottom-24 right-4 z-30 h-24 w-24 overflow-hidden rounded-full border border-accent-burnt/30 bg-[#1A1A1A]/85 shadow-lg backdrop-blur-sm">
       <Canvas
-        camera={{ position: [0, 0.55, 3.5], fov: 36 }}
+        camera={{ position: [0, 0.48, 3.15], fov: 38 }}
         gl={{ antialias: false, alpha: true }}
         className="h-full w-full"
         dpr={[1, 1]}

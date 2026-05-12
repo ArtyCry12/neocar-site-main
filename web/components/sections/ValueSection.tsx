@@ -19,7 +19,7 @@ function SplitCard({
   return (
     <div className="overflow-hidden rounded-2xl border border-accent-burnt/30 bg-[image:var(--background-image-card-gradient)] shadow-lg backdrop-blur-md">
       <div className="grid min-h-[200px] grid-cols-1 sm:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]">
-        <div className="border-b border-accent-burnt/30 p-5 sm:border-b-0">
+        <div className="border-b border-accent-burnt/30 bg-[image:var(--background-image-typical-warm-gradient)] p-5 sm:border-b-0">
           <span className="inline-flex rounded-full bg-white/8 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.15em] text-white/40">
             {typicalLabel}
           </span>
