@@ -83,12 +83,12 @@ export default function HeroSection({
           {copy(effectiveStage)}
         </div>
 
-        <div className="relative order-last flex min-h-[90svh] flex-1 flex-col max-lg:justify-end lg:order-first lg:min-h-[100svh] lg:justify-start lg:flex-[1.15]">
+        <div className="relative order-last flex min-h-[90svh] flex-1 flex-col max-lg:justify-start lg:order-first lg:min-h-[100svh] lg:justify-start lg:flex-[1.15]">
           <div
             className="pointer-events-none absolute inset-x-4 top-0 z-[6] h-px bg-gradient-to-r from-transparent via-[#FF8D21]/25 to-transparent lg:hidden"
             aria-hidden
           />
-          <div className="w-full max-lg:mt-auto max-lg:shrink-0 lg:h-full lg:flex-1 lg:min-h-0">
+          <div className="w-full max-lg:min-h-0 max-lg:flex-1 lg:h-full lg:flex-1 lg:min-h-0">
             <HeroCanvas active={active} isMobile={isMobile} />
           </div>
         </div>
