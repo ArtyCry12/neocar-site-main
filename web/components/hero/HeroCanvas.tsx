@@ -4,6 +4,8 @@ import Image from "next/image";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { AdaptiveDpr, ContactShadows, useGLTF } from "@react-three/drei";
 import { Suspense, useEffect, useMemo, useRef, useState } from "react";
+
+import { useIsDesktopLayout } from "@/hooks/use-match-media";
 import { ErrorBoundary } from "react-error-boundary";
 import * as THREE from "three";
 
@@ -134,20 +136,10 @@ type Props = {
 
 export default function HeroCanvas({ active, isMobile = false }: Props) {
   const [can3D, setCan3D] = useState(false);
-  const [isDesktop, setIsDesktop] = useState(false);
+  const isDesktop = useIsDesktopLayout();
 
   useEffect(() => {
-    const mq = window.matchMedia("(min-width: 1024px)");
-    const apply = () => {
-      setCan3D(canRender3D());
-      setIsDesktop(mq.matches);
-    };
-    const id = requestAnimationFrame(apply);
-    mq.addEventListener("change", apply);
-    return () => {
-      cancelAnimationFrame(id);
-      mq.removeEventListener("change", apply);
-    };
+    setCan3D(canRender3D());
   }, []);
 
   const useModel = process.env.NEXT_PUBLIC_HERO_USE_GLB !== "false";

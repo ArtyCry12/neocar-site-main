@@ -5,6 +5,8 @@ import Image from "next/image";
 import { useReducedMotion } from "framer-motion";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
+import { useIsMobileLayout } from "@/hooks/use-match-media";
+
 import { MOBILE_HERO_CANVAS_MIN_H } from "./hero-canvas-layout";
 
 const HeroCanvas = dynamic(() => import("./HeroCanvas"), {
@@ -28,15 +30,7 @@ export default function HeroSection({
   const reduceMotion = useReducedMotion();
   const [active, setActive] = useState(true);
   const [stageIdx, setStageIdx] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const mq = window.matchMedia("(max-width: 1023px)");
-    const apply = () => setIsMobile(mq.matches);
-    apply();
-    mq.addEventListener("change", apply);
-    return () => mq.removeEventListener("change", apply);
-  }, []);
+  const isMobile = useIsMobileLayout();
 
   useEffect(() => {
     const el = sectionRef.current;
