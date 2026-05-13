@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { AdaptiveDpr, ContactShadows, useGLTF } from "@react-three/drei";
-import { Suspense, useEffect, useMemo, useRef, useState } from "react";
+import { Suspense, useEffect, useMemo, useRef, useSyncExternalStore } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import * as THREE from "three";
 
@@ -11,6 +11,14 @@ import { useIsDesktopLayout } from "@/hooks/use-match-media";
 import { canRender3D } from "@/lib/device";
 
 import { MOBILE_HERO_CANVAS_MIN_H } from "./hero-canvas-layout";
+
+function useCanRender3D(): boolean {
+  return useSyncExternalStore(
+    () => () => {},
+    () => canRender3D(),
+    () => false,
+  );
+}
 
 /** Desktop hero GLB (unchanged). */
 const DESKTOP_HERO_GLB_URL =
@@ -156,12 +164,8 @@ type Props = {
 };
 
 export default function HeroCanvas({ active, isMobile = false }: Props) {
-  const [can3D, setCan3D] = useState(false);
+  const can3D = useCanRender3D();
   const isDesktop = useIsDesktopLayout();
-
-  useEffect(() => {
-    setCan3D(canRender3D());
-  }, []);
 
   const useModel = process.env.NEXT_PUBLIC_HERO_USE_GLB !== "false";
 
