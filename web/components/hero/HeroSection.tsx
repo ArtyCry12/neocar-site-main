@@ -8,6 +8,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { useIsMobileLayout } from "@/hooks/use-match-media";
 
 import { MOBILE_HERO_CANVAS_MIN_H } from "./hero-canvas-layout";
+import HeroMobileHeroVideo from "./HeroMobileHeroVideo";
 
 const HeroCanvas = dynamic(() => import("./HeroCanvas"), {
   ssr: false,
@@ -89,7 +90,11 @@ export default function HeroSection({
             aria-hidden
           />
           <div className="w-full max-lg:min-h-0 max-lg:flex-1 lg:h-full lg:flex-1 lg:min-h-0">
-            <HeroCanvas active={active} isMobile={isMobile} />
+            {isMobile ? (
+              <HeroMobileHeroVideo active={active} />
+            ) : (
+              <HeroCanvas active={active} isMobile={false} />
+            )}
           </div>
         </div>
       </div>
