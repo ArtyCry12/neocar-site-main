@@ -5,7 +5,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { whyRows } from "@/content/why";
 import { pickLocale } from "@/content/types";
 
-function SplitCard({
+function WhyComparisonMini({
   typical,
   us,
   typicalLabel,
@@ -17,26 +17,21 @@ function SplitCard({
   usLabel: string;
 }) {
   return (
-    <div className="overflow-hidden rounded-2xl border border-accent-burnt/30 bg-[image:var(--background-image-card-gradient)] shadow-lg backdrop-blur-md">
-      <div className="grid min-h-[200px] grid-cols-1 sm:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]">
-        <div className="border-b border-accent-burnt/30 bg-[image:var(--background-image-typical-warm-gradient)] p-5 sm:border-b-0">
-          <span className="inline-flex rounded-full border border-zinc-400/50 bg-white/60 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.15em] text-zinc-700">
+    <div className="rounded-xl border border-accent-burnt/20 bg-black/30 px-4 py-3 backdrop-blur-sm">
+      <div className="grid gap-4 sm:grid-cols-2">
+        <div>
+          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.15em] text-accent-amber">
             {typicalLabel}
-          </span>
-          <p className="mt-3 text-sm leading-relaxed text-zinc-800">{typical}</p>
+          </p>
+          <p className="mt-2 text-sm leading-relaxed text-white/70">{typical}</p>
         </div>
-        <div
-          className="hidden w-px shrink-0 self-stretch bg-gradient-to-b from-transparent via-zinc-400/40 to-transparent sm:block"
-          aria-hidden
-        />
-        <div className="bg-[image:var(--background-image-us-gradient)] p-5">
-          <div className="mb-3 flex items-center gap-1.5">
-            <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-orange-vivid" />
-            <span className="font-mono text-sm font-bold uppercase tracking-[0.14em] text-white">
-              {usLabel}
-            </span>
-          </div>
-          <p className="text-lg font-bold leading-snug text-white">{us}</p>
+        <div>
+          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.15em] text-accent-amber">
+            {usLabel}
+          </p>
+          <p className="mt-2 text-sm font-semibold leading-snug text-white">
+            {us}
+          </p>
         </div>
       </div>
     </div>
@@ -60,20 +55,20 @@ export default function ValueSection() {
           <p className="mt-4 text-lg text-white/75">{t("subtitle")}</p>
         </div>
 
-        <div className="mt-12 grid gap-6 lg:grid-cols-3">
-          <SplitCard
+        <div className="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-3">
+          <WhyComparisonMini
             typicalLabel={t("typicalLabel")}
             usLabel={t("usLabel")}
             typical={t("v1Typical")}
             us={t("v1Us")}
           />
-          <SplitCard
+          <WhyComparisonMini
             typicalLabel={t("typicalLabel")}
             usLabel={t("usLabel")}
             typical={t("v2Typical")}
             us={t("v2Us")}
           />
-          <SplitCard
+          <WhyComparisonMini
             typicalLabel={t("typicalLabel")}
             usLabel={t("usLabel")}
             typical={t("v3Typical")}

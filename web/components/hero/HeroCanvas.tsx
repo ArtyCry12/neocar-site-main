@@ -82,8 +82,8 @@ function ForkliftGLB({
     root.position.sub(center);
     const size = box.getSize(new THREE.Vector3());
     const maxDim = Math.max(size.x, size.y, size.z, 0.001);
-    /* Mobile ~×1.58 vs 4.4 for visually “~2×” footprint; desktop unchanged. */
-    const target = isMobile ? 6.95 : 3.25;
+    /* Mobile: larger footprint for hero band (desktop unchanged). */
+    const target = isMobile ? 7.85 : 3.25;
     root.scale.setScalar(target / maxDim);
     return root;
   }, [scene, isMobile]);
@@ -99,9 +99,9 @@ function ForkliftGLB({
     group.current.rotation.y += delta * 0.2;
   });
 
-  /* Mobile: center model in hero band (desktop branch unchanged). */
-  const y = isMobile ? -0.38 : -0.35;
-  const z = isMobile ? 0.05 : 0;
+  /* Mobile: center in tall canvas band (desktop branch unchanged). */
+  const y = isMobile ? -0.42 : -0.35;
+  const z = isMobile ? 0.06 : 0;
 
   return (
     <group ref={group} position={[0, y, z]}>
@@ -137,7 +137,7 @@ export default function HeroCanvas({ active, isMobile = false }: Props) {
 
   if (!can3D) {
     return (
-      <div className="pointer-events-none relative h-full min-h-[70svh] w-full lg:min-h-[100svh]">
+      <div className="pointer-events-none relative h-full min-h-[78svh] w-full lg:min-h-[100svh]">
         <Image
           src="/media/hero/marquee-1.jpg"
           alt="NEOCAR — складская техника, фоновое фото"
@@ -153,15 +153,15 @@ export default function HeroCanvas({ active, isMobile = false }: Props) {
   const dprMax = isDesktop ? 1.5 : 1;
   const showShadowsAndHemi = isDesktop;
   const camera = isMobile
-    ? { position: [0, 0.46, 5.55] as const, fov: 42 }
+    ? { position: [0, 0.42, 6.1] as const, fov: 43 }
     : { position: [0, 1.0, 5.5] as const, fov: 44 };
 
   return (
-    <div className="pointer-events-none relative h-full min-h-[70svh] w-full lg:min-h-[100svh]">
+    <div className="pointer-events-none relative h-full min-h-[78svh] w-full lg:min-h-[100svh]">
       <Canvas
         camera={camera}
         gl={{ antialias: isDesktop, alpha: true }}
-        className="h-full w-full min-h-[70svh] lg:min-h-[100svh]"
+        className="h-full w-full min-h-[78svh] lg:min-h-[100svh]"
         dpr={[1, dprMax]}
       >
         <color attach="background" args={["#0a0a0a"]} />

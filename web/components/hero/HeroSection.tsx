@@ -8,7 +8,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 const HeroCanvas = dynamic(() => import("./HeroCanvas"), {
   ssr: false,
   loading: () => (
-    <div className="relative h-full min-h-[70svh] w-full bg-[radial-gradient(circle_at_center,#18181b_0%,#050506_65%)] lg:min-h-[100svh]" />
+    <div className="relative h-full min-h-[78svh] w-full bg-[radial-gradient(circle_at_center,#18181b_0%,#050506_65%)] lg:min-h-[100svh]" />
   ),
 });
 
@@ -83,7 +83,7 @@ export default function HeroSection({
           {copy(effectiveStage)}
         </div>
 
-        <div className="relative order-last flex min-h-[82svh] flex-1 flex-col max-lg:justify-end lg:order-first lg:min-h-[100svh] lg:justify-start lg:flex-[1.15]">
+        <div className="relative order-last flex min-h-[90svh] flex-1 flex-col max-lg:justify-end lg:order-first lg:min-h-[100svh] lg:justify-start lg:flex-[1.15]">
           <div
             className="pointer-events-none absolute inset-x-4 top-0 z-[6] h-px bg-gradient-to-r from-transparent via-[#FF8D21]/25 to-transparent lg:hidden"
             aria-hidden
