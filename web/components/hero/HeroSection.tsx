@@ -83,7 +83,7 @@ export default function HeroSection({
           {copy(effectiveStage)}
         </div>
 
-        <div className="relative order-last flex min-h-[90svh] flex-1 flex-col max-lg:justify-start lg:order-first lg:min-h-[100svh] lg:justify-start lg:flex-[1.15]">
+        <div className="relative order-last flex min-h-[76svh] flex-1 flex-col max-lg:justify-start lg:order-first lg:min-h-[100svh] lg:justify-start lg:flex-[1.15]">
           <div
             className="pointer-events-none absolute inset-x-4 top-0 z-[6] h-px bg-gradient-to-r from-transparent via-[#FF8D21]/25 to-transparent lg:hidden"
             aria-hidden

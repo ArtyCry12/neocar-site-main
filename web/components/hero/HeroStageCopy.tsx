@@ -48,7 +48,7 @@ export default function HeroStageCopy({ stageIdx }: { stageIdx: number }) {
   };
 
   return (
-    <div className="relative z-10 flex min-h-[55svh] w-full flex-1 flex-col justify-between px-5 pb-6 pt-4 text-center lg:min-h-[100svh] lg:px-8 lg:pb-24 lg:pt-24 lg:text-left">
+    <div className="relative z-10 flex max-lg:min-h-0 w-full flex-1 flex-col justify-start px-5 pb-6 pt-4 text-center lg:min-h-[100svh] lg:justify-between lg:px-8 lg:pb-24 lg:pt-24 lg:text-left">
       <div className="flex max-w-xl flex-col items-center lg:items-start">
         <span className="mb-4 inline-flex self-center rounded-full border border-accent-burnt/30 bg-black/35 px-4 py-1 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-accent-amber/90 backdrop-blur-sm lg:self-start">
           {tHero("badge")}
