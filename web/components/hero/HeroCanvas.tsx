@@ -9,10 +9,23 @@ import * as THREE from "three";
 
 import { canRender3D } from "@/lib/device";
 
+import { MOBILE_HERO_CANVAS_MIN_H } from "./hero-canvas-layout";
+
 const MODEL_URL =
   process.env.NEXT_PUBLIC_HERO_GLB_URL ?? "/models/forklift.opt.glb";
 
-function ForkliftPlaceholder({ active }: { active: boolean }) {
+/** Normalized GLB fit target after center+maxDim (desktop). */
+const DESKTOP_HERO_MODEL_TARGET = 3.25;
+/** Mobile: ~+15% vs prior 7.85 for hero readability; tune with camera + canvas height. */
+const MOBILE_HERO_MODEL_TARGET = 9.03;
+
+function ForkliftPlaceholder({
+  active,
+  isMobile = false,
+}: {
+  active: boolean;
+  isMobile?: boolean;
+}) {
   const group = useRef<THREE.Group>(null);
 
   useFrame((_, delta) => {
@@ -21,7 +34,12 @@ function ForkliftPlaceholder({ active }: { active: boolean }) {
   });
 
   return (
-    <group ref={group} position={[0, -0.65, 0]} rotation={[0, Math.PI, 0]}>
+    <group
+      ref={group}
+      position={[0, isMobile ? -0.82 : -0.65, isMobile ? 0.06 : 0]}
+      scale={isMobile ? 1.15 : 1}
+      rotation={[0, Math.PI, 0]}
+    >
       <mesh>
         <boxGeometry args={[2.35, 1.05, 3.1]} />
         <meshStandardMaterial
@@ -82,8 +100,7 @@ function ForkliftGLB({
     root.position.sub(center);
     const size = box.getSize(new THREE.Vector3());
     const maxDim = Math.max(size.x, size.y, size.z, 0.001);
-    /* Mobile: larger footprint for hero band (desktop unchanged). */
-    const target = isMobile ? 7.85 : 3.25;
+    const target = isMobile ? MOBILE_HERO_MODEL_TARGET : DESKTOP_HERO_MODEL_TARGET;
     root.scale.setScalar(target / maxDim);
     return root;
   }, [scene, isMobile]);
@@ -99,8 +116,8 @@ function ForkliftGLB({
     group.current.rotation.y += delta * 0.2;
   });
 
-  /* Mobile: center in tall canvas band (desktop branch unchanged). */
-  const y = isMobile ? -0.42 : -0.35;
+  /* Mobile: sit lower in frame; desktop unchanged. */
+  const y = isMobile ? -0.58 : -0.35;
   const z = isMobile ? 0.06 : 0;
 
   return (
@@ -137,7 +154,9 @@ export default function HeroCanvas({ active, isMobile = false }: Props) {
 
   if (!can3D) {
     return (
-      <div className="pointer-events-none relative h-full min-h-[78svh] w-full lg:min-h-[100svh]">
+      <div
+        className={`pointer-events-none relative h-full ${MOBILE_HERO_CANVAS_MIN_H} w-full lg:min-h-[100svh]`}
+      >
         <Image
           src="/media/hero/marquee-1.jpg"
           alt="NEOCAR — складская техника, фоновое фото"
@@ -153,15 +172,21 @@ export default function HeroCanvas({ active, isMobile = false }: Props) {
   const dprMax = isDesktop ? 1.5 : 1;
   const showShadowsAndHemi = isDesktop;
   const camera = isMobile
-    ? { position: [0, 0.42, 6.1] as const, fov: 43 }
+    ? {
+        /* Pull back + slightly lower eye to fit larger mobile scale without bottom clip. */
+        position: [0, 0.36, 7.05] as const,
+        fov: 44,
+      }
     : { position: [0, 1.0, 5.5] as const, fov: 44 };
 
   return (
-    <div className="pointer-events-none relative h-full min-h-[78svh] w-full lg:min-h-[100svh]">
+    <div
+      className={`pointer-events-none relative h-full ${MOBILE_HERO_CANVAS_MIN_H} w-full lg:min-h-[100svh]`}
+    >
       <Canvas
         camera={camera}
         gl={{ antialias: isDesktop, alpha: true }}
-        className="h-full w-full min-h-[78svh] lg:min-h-[100svh]"
+        className={`h-full w-full ${MOBILE_HERO_CANVAS_MIN_H} lg:min-h-[100svh]`}
         dpr={[1, dprMax]}
       >
         <color attach="background" args={["#0a0a0a"]} />
@@ -196,11 +221,13 @@ export default function HeroCanvas({ active, isMobile = false }: Props) {
               frames={1}
             />
           ) : null}
-          <ErrorBoundary fallback={<ForkliftPlaceholder active={active} />}>
+          <ErrorBoundary
+            fallback={<ForkliftPlaceholder active={active} isMobile={isMobile} />}
+          >
             {useModel ? (
               <ForkliftGLB active={active} isMobile={isMobile} />
             ) : (
-              <ForkliftPlaceholder active={active} />
+              <ForkliftPlaceholder active={active} isMobile={isMobile} />
             )}
           </ErrorBoundary>
         </Suspense>
