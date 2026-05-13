@@ -4,21 +4,27 @@ import Image from "next/image";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { AdaptiveDpr, ContactShadows, useGLTF } from "@react-three/drei";
 import { Suspense, useEffect, useMemo, useRef, useState } from "react";
-
-import { useIsDesktopLayout } from "@/hooks/use-match-media";
 import { ErrorBoundary } from "react-error-boundary";
 import * as THREE from "three";
 
+import { useIsDesktopLayout } from "@/hooks/use-match-media";
 import { canRender3D } from "@/lib/device";
 
 import { MOBILE_HERO_CANVAS_MIN_H } from "./hero-canvas-layout";
 
-const MODEL_URL =
+/** Desktop hero GLB (unchanged). */
+const DESKTOP_HERO_GLB_URL =
   process.env.NEXT_PUBLIC_HERO_GLB_URL ?? "/models/forklift.opt.glb";
+/**
+ * Mobile-only hero GLB (Meshy). Override via env if needed.
+ * Desktop always uses {@link DESKTOP_HERO_GLB_URL}.
+ */
+const MOBILE_HERO_GLB_URL =
+  process.env.NEXT_PUBLIC_HERO_GLB_MOBILE_URL ?? "/models/forklift-meshy.glb";
 
 /** Normalized GLB fit target after center+maxDim (desktop). */
 const DESKTOP_HERO_MODEL_TARGET = 3.25;
-/** Mobile: ~+15% vs prior 7.85 for hero readability; tune with camera + canvas height. */
+/** Mobile: tuned for tall hero band + Meshy asset. */
 const MOBILE_HERO_MODEL_TARGET = 9.03;
 
 function ForkliftPlaceholder({
@@ -38,7 +44,7 @@ function ForkliftPlaceholder({
   return (
     <group
       ref={group}
-      position={[0, isMobile ? -0.82 : -0.65, isMobile ? 0.06 : 0]}
+      position={[0, isMobile ? -1.05 : -0.65, isMobile ? 0.06 : 0]}
       scale={isMobile ? 1.15 : 1}
       rotation={[0, Math.PI, 0]}
     >
@@ -78,14 +84,28 @@ function ForkliftPlaceholder({
   );
 }
 
-function ForkliftGLB({
+function ForkliftGLB({ active, isMobile }: { active: boolean; isMobile: boolean }) {
+  const modelUrl = isMobile ? MOBILE_HERO_GLB_URL : DESKTOP_HERO_GLB_URL;
+  return (
+    <ForkliftGLBLoaded
+      key={modelUrl}
+      modelUrl={modelUrl}
+      active={active}
+      isMobile={isMobile}
+    />
+  );
+}
+
+function ForkliftGLBLoaded({
+  modelUrl,
   active,
   isMobile,
 }: {
+  modelUrl: string;
   active: boolean;
   isMobile: boolean;
 }) {
-  const { scene } = useGLTF(MODEL_URL);
+  const { scene } = useGLTF(modelUrl);
   const group = useRef<THREE.Group>(null);
 
   const model = useMemo(() => {
@@ -118,12 +138,13 @@ function ForkliftGLB({
     group.current.rotation.y += delta * 0.2;
   });
 
-  /* Mobile: sit lower in frame; desktop unchanged. */
-  const y = isMobile ? -0.58 : -0.35;
-  const z = isMobile ? 0.06 : 0;
+  /* Mobile: lower in frame, slight +X; desktop unchanged. */
+  const x = isMobile ? 0.12 : 0;
+  const y = isMobile ? -1.12 : -0.35;
+  const z = isMobile ? 0.08 : 0;
 
   return (
-    <group ref={group} position={[0, y, z]}>
+    <group ref={group} position={[x, y, z]}>
       <primitive object={model} />
     </group>
   );
@@ -165,9 +186,8 @@ export default function HeroCanvas({ active, isMobile = false }: Props) {
   const showShadowsAndHemi = isDesktop;
   const camera = isMobile
     ? {
-        /* Pull back + slightly lower eye to fit larger mobile scale without bottom clip. */
-        position: [0, 0.36, 7.05] as const,
-        fov: 44,
+        position: [0, 0.12, 8.15] as const,
+        fov: 45,
       }
     : { position: [0, 1.0, 5.5] as const, fov: 44 };
 
@@ -228,4 +248,5 @@ export default function HeroCanvas({ active, isMobile = false }: Props) {
   );
 }
 
-useGLTF.preload(MODEL_URL);
+useGLTF.preload(DESKTOP_HERO_GLB_URL);
+useGLTF.preload(MOBILE_HERO_GLB_URL);
